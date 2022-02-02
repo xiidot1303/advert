@@ -8,6 +8,13 @@ import os
 from config import TELEGRAM_BOT_API_TOKEN, ENVIRONMENT
 import requests
 
+from bot.main import *
+from bot.login import *
+from bot.conversationList import *
+
+
+
+
 bot_obj = Bot(TELEGRAM_BOT_API_TOKEN)
 persistence = PicklePersistence(filename='persistencebot')
 
@@ -19,3 +26,22 @@ else: # in local computer
     dp = updater.dispatcher
 
 
+login_handler = ConversationHandler(
+    entry_points=[CommandHandler('start', start)],
+    states = {
+        SELECT_LANG: [MessageHandler(Filters.text(['UZ 🇺🇿', 'RU 🇷🇺']), select_lang)],
+        SEND_NAME: [MessageHandler(Filters.text, send_name)],
+        SEND_CONTACT: [MessageHandler(Filters.all, send_contact)],
+    },
+    fallbacks= [],
+    name='login',
+    persistent=True,
+)
+
+
+
+
+
+
+
+dp.add_handler(login_handler)
