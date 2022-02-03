@@ -40,6 +40,9 @@ login_handler = ConversationHandler(
 
 
 
+settings_handler = ConversationHandler(
+    entry_points=[MessageHandler(Filters.text(lang_dict['settings']), settings)]
+)
 
 
 
