@@ -1,4 +1,3 @@
-from operator import imod
 from app.models import *
 from telegram import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 from bot.conversationList import *

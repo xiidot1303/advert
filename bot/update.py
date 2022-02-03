@@ -11,7 +11,7 @@ import requests
 from bot.main import *
 from bot.login import *
 from bot.conversationList import *
-
+from bot.settings import *
 
 
 
@@ -41,10 +41,18 @@ login_handler = ConversationHandler(
 
 
 settings_handler = ConversationHandler(
-    entry_points=[MessageHandler(Filters.text(lang_dict['settings']), settings)]
+    entry_points=[MessageHandler(Filters.text(lang_dict['settings']), settings)],
+    states = {
+        ALL_SETTINGS: [MessageHandler(Filters.text, all_settings)],
+    }, 
+    fallbacks=[],
+    name='settings',
+    persistent=True,
 )
 
 
 
+dp.add_handler(settings_handler)
 
 dp.add_handler(login_handler)
+

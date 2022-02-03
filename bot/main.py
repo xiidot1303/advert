@@ -15,3 +15,4 @@ def start(update, context):
 
 def settings(update, context):
     make_button_settings()
+    return ALL_SETTINGS

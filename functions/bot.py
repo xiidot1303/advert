@@ -14,7 +14,8 @@ def main_menu(update, context):
         www= 0 # do nothing
     
     bot = context.bot
-    bot.send_message(update.message.chat.id, get_word('main menu', update), reply_markup=ReplyKeyboardMarkup(keyboard=[[get_word('', update)], [get_word('', update)]], resize_keyboard=True))
+    keyboard=[[get_word('seller', update)], [get_word('buyer', update)], [get_word('settings', update)]]
+    bot.send_message(update.message.chat.id, get_word('main menu', update), reply_markup=ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True))
 
 def make_button_settings(update, context):
     try:
@@ -41,8 +42,8 @@ def is_registered(id):
     else:
         return False
 
-def get_user_by_id(id):
-    user = Bot_user.objects.get(user_id=id)
+def get_user_by_update(update):
+    user = Bot_user.objects.get(user_id=update.message.chat.id)
     return user
 
 
