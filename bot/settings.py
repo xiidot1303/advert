@@ -27,7 +27,11 @@ def all_settings(update, context):
         return LANG_SETTINGS
 
     elif msg == get_word('change phone number', update):
-        ###
+        user = get_user_by_update(update)
+        text = get_word('your phone number', update).replace('<>', user.phone) + '\n\n' + get_word('send new phone number', update)
+        i_contact = KeyboardButton(text=get_word('leave number', update), request_contact=True)
+        i_back = KeyboardButton(text=get_word('back', update))
+        update.message.reply_text(text, reply_markup=ReplyKeyboardMarkup([[i_contact], [i_back]], resize_keyboard=True), parse_mode=telegram.ParseMode.HTML)
         return PHONE_SETTINGS
     elif msg == get_word('change name', update):
         ###
@@ -37,7 +41,7 @@ def all_settings(update, context):
 
 #  lang settings
 @is_start
-def click_lang(update, context):
+def lang_settings(update, context):
     update = update.callback_query
     bot = context.bot
     data = str(update.data)
@@ -62,5 +66,28 @@ def click_lang(update, context):
     
     i_uz = InlineKeyboardButton(text=uz_text, callback_data='set_lang_uz')
     i_ru = InlineKeyboardButton(text=ru_text, callback_data='set_lang_ru')
-    i_back = InlineKeyboardButton(get_word('back', update), callback_data='back_main_menu')
+    i_back = InlineKeyboardButton(get_word('back', update), callback_data='back_settings')
     update.edit_message_text(get_word('select lang', update), reply_markup = InlineKeyboardMarkup([[i_uz], [i_ru], [i_back]]))
+
+@is_start
+def phone_settings(update, context):
+    if update.message.contact == None or not update.message.contact:
+        msg = update.message.text
+        if msg == get_word('back', update):
+            make_button_settings(update, context)
+            return ALL_SETTINGS
+        phone_number = update.message.text
+    else:
+        phone_number = update.message.contact.phone_number
+    
+    # check that phone is available or no
+    is_available = Bot_user.objects.filter(phone=phone_number)
+    if is_available:
+        update.message.reply_text(get_word('number is logged',update))
+        return PHONE_SETTINGS
+    obj = Bot_user.objects.get(user_id=update.message.chat.id)
+    obj.phone = phone_number
+    obj.save()
+    update.message.reply_text(get_word('changed your phone number', update))
+    make_button_settings(update, context)
+    return ALL_SETTINGS

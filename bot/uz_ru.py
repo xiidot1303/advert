@@ -27,13 +27,17 @@ lang_dict = {
     
     'change name': ["""Ismni o\'zgartirish 👤""", """Смени имени 👤"""],
     
-    'settings_desc': ["""Sozlamalar ⚙️""", """Настройки ⚙️"""],
+    'settings desc': ["""Sozlamalar ⚙️""", """Настройки ⚙️"""],
     
-    '': [""" """, """ """],
+    'your phone number': ["""📌 Sizning telefon raqamingiz: <> 📌""", """📌 Ваш номер телефона: <> 📌"""],
     
-    '': [""" """, """ """],
+    'send new phone number': ["""Yangi telefon raqamingizni yuboring!\n<i>Jarayonni bekor qilish uchun <🔙 Ortga> tugmasini bosing.</i>""", 
+        """Отправьте свой новый номер телефона!\n<i>Нажмите кнопку <🔙 Назад>, чтобы отменить процесс.</i>"""],
+
+    'number is logged': ['Bunday raqam bilan ro\'yxatdan o\'tilgan, boshqa telefon raqam kiriting', 
+        'Этот номер уже зарегистрирован. Введите другой номер'],
     
-    '': [""" """, """ """],
+    'changed your phone number': ["""Sizning telefon raqamingiz muvaffaqiyatli o\'zgartirildi! ♻️""", """Ваш номер телефона успешно изменен! ♻️"""],
     
     '': [""" """, """ """],
     

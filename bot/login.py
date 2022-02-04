@@ -34,6 +34,7 @@ def send_name(update, context):
 
     obj = Bot_user.objects.get(user_id=update.message.chat.id)
     obj.name=update.message.text
+    obj.username=update.message.chat.username
     obj.save()
     i_contact = KeyboardButton(text=get_word('leave number', update), request_contact=True)
     update.message.reply_text(get_word('send number', update), reply_markup=ReplyKeyboardMarkup([[i_contact], [get_word('back', update)]], resize_keyboard=True))
@@ -46,8 +47,7 @@ def send_contact(update, context):
         return SEND_NAME
 
     if update.message.contact == None or not update.message.contact:
-        update.message.reply_text(get_word('enter button', update))
-        return SEND_CONTACT
+        phone_number = update.message.text
     else:
         phone_number = update.message.contact.phone_number
     # check that phone is available or no

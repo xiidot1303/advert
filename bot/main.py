@@ -14,5 +14,5 @@ def start(update, context):
         return SELECT_LANG
 
 def settings(update, context):
-    make_button_settings()
+    make_button_settings(update, context)
     return ALL_SETTINGS

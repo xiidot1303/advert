@@ -40,7 +40,7 @@ def is_start(func):    # This deco break registration if user send /start.
            update = args[0].callback_query
            data = update.data  
         id = update.message.chat.id
-        if update.message.text == '/start':
+        if update.message.text == '/start' or data == 'main_menu' or update.message.text == get_word('main menu', update):
             main_menu(args[0], args[1])
             return ConversationHandler.END
         else:
