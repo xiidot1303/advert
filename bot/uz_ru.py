@@ -31,15 +31,43 @@ lang_dict = {
     
     'your phone number': ["""📌 Sizning telefon raqamingiz: <> 📌""", """📌 Ваш номер телефона: <> 📌"""],
     
-    'send new phone number': ["""Yangi telefon raqamingizni yuboring!\n<i>Jarayonni bekor qilish uchun <🔙 Ortga> tugmasini bosing.</i>""", 
-        """Отправьте свой новый номер телефона!\n<i>Нажмите кнопку <🔙 Назад>, чтобы отменить процесс.</i>"""],
+    'send new phone number': ["""Yangi telefon raqamingizni yuboring!\n<i>Jarayonni bekor qilish uchun "🔙 Ortga" tugmasini bosing.</i>""", 
+        """Отправьте свой новый номер телефона!\n<i>Нажмите кнопку "🔙 Назад", чтобы отменить процесс.</i>"""],
 
     'number is logged': ['Bunday raqam bilan ro\'yxatdan o\'tilgan, boshqa telefon raqam kiriting', 
         'Этот номер уже зарегистрирован. Введите другой номер'],
     
     'changed your phone number': ["""Sizning telefon raqamingiz muvaffaqiyatli o\'zgartirildi! ♻️""", """Ваш номер телефона успешно изменен! ♻️"""],
     
-    '': [""" """, """ """],
+    'your name': ["""Sizning ismingiz: """, """Ваше имя: """],
+
+    'send new name': ["""Ismingizni o'zgartirish uchun, yangi ism kiriting:\n<i>Jarayonni bekor qilish uchun "🔙 Ortga" tugmasini bosing.</i>""",
+        """Чтобы изменить свое имя, введите новое:\n<i>Нажмите кнопку "🔙 Назад", чтобы отменить процесс.</i>"""],
+    
+    'changed your name': ["""Sizning ismingiz muvaffaqiyatli o'zgartirildi!""", """Ваше имя успешно изменено!"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
     
 
 }

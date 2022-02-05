@@ -46,11 +46,14 @@ settings_handler = ConversationHandler(
         ALL_SETTINGS: [MessageHandler(Filters.text, all_settings)],
         LANG_SETTINGS: [CallbackQueryHandler(lang_settings), CommandHandler('start', lang_settings)],
         PHONE_SETTINGS: [MessageHandler(Filters.all, phone_settings)],
+        NAME_SETTINGS: [MessageHandler(Filters.text, name_settings)],
     }, 
     fallbacks=[],
     name='settings',
     persistent=True,
 )
+
+
 
 
 

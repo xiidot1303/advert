@@ -1,5 +1,5 @@
 from app.models import *
-from telegram import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from bot.conversationList import *
 from telegram.ext import ConversationHandler
 from functions.bot import *
@@ -10,6 +10,7 @@ from functions.deco import *
 def all_settings(update, context):
     msg = update.message.text
     bot = context.bot
+    
     if msg == get_word('change lang', update):
         current_lang = get_user_by_update(update).lang
         if current_lang == 'uz':
@@ -34,7 +35,9 @@ def all_settings(update, context):
         update.message.reply_text(text, reply_markup=ReplyKeyboardMarkup([[i_contact], [i_back]], resize_keyboard=True), parse_mode=telegram.ParseMode.HTML)
         return PHONE_SETTINGS
     elif msg == get_word('change name', update):
-        ###
+        user = get_user_by_update(update)
+        text = get_word('your name', update) + user.name + '\n\n' + get_word('send new name', update)
+        update.message.reply_text(text, reply_markup=ReplyKeyboardMarkup(keyboard=[[get_word('back', update)]], resize_keyboard=True), parse_mode=telegram.ParseMode.HTML)
         return NAME_SETTINGS
 
 
@@ -69,6 +72,8 @@ def lang_settings(update, context):
     i_back = InlineKeyboardButton(get_word('back', update), callback_data='back_settings')
     update.edit_message_text(get_word('select lang', update), reply_markup = InlineKeyboardMarkup([[i_uz], [i_ru], [i_back]]))
 
+
+#phone settings
 @is_start
 def phone_settings(update, context):
     if update.message.contact == None or not update.message.contact:
@@ -89,5 +94,20 @@ def phone_settings(update, context):
     obj.phone = phone_number
     obj.save()
     update.message.reply_text(get_word('changed your phone number', update))
+    make_button_settings(update, context)
+    return ALL_SETTINGS
+
+#name settings
+@is_start
+def name_settings(update, context):
+    msg = update.message.text
+    if msg == get_word('back', update):
+        make_button_settings(update, context)
+        return ALL_SETTINGS
+    new_name = msg
+    obj = get_user_by_update(update)
+    obj.name = new_name
+    obj.save()
+    update.message.reply_text(get_word('changed your name', update))
     make_button_settings(update, context)
     return ALL_SETTINGS

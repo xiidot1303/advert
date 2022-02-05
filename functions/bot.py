@@ -16,7 +16,9 @@ def main_menu(update, context):
     bot = context.bot
     keyboard=[[get_word('seller', update)], [get_word('buyer', update)], [get_word('settings', update)]]
     bot.send_message(update.message.chat.id, get_word('main menu', update), reply_markup=ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True))
+    check_username(update)
 
+    
 def make_button_settings(update, context):
     try:
         a = update.callback_query.id
@@ -46,5 +48,10 @@ def get_user_by_update(update):
     user = Bot_user.objects.get(user_id=update.message.chat.id)
     return user
 
-
+def check_username(update):
+    user = get_user_by_update(update)
+    if user.username != update.message.text:
+        user.username = update.message.text
+        user.save()
+    
 
