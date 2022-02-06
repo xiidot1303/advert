@@ -16,3 +16,6 @@ def start(update, context):
 def settings(update, context):
     make_button_settings(update, context)
     return ALL_SETTINGS
+
+def seller(update, context):
+    

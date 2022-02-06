@@ -23,6 +23,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     user = models.ForeignKey('Bot_user', null=True, blank=False, on_delete=models.PROTECT)
+    questions = models.CharField(null=True, blank=True, max_length=3000)  #save questions by "/""
     date = models.DateField(null=True, blank=True, max_length=20)
     answer = models.CharField(null=True, blank=True, max_length=300)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)

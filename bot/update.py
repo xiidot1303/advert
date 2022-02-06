@@ -54,7 +54,15 @@ settings_handler = ConversationHandler(
 )
 
 
-
+seller_handler = ConversationHandler(
+    entry_points = [MessageHandler(Filters.text(lang_dict['seller']), seller)],
+    states = {
+        ANSWERING: [MessageHandler(Filters.text, loop_answering), MessageHandler(Filters.photo, loop_answering)],
+    },
+    fallbacks=[],
+    name = 'seller',
+    persistent=True,
+)
 
 
 dp.add_handler(settings_handler)
