@@ -12,7 +12,7 @@ from bot.main import *
 from bot.login import *
 from bot.conversationList import *
 from bot.settings import *
-
+from bot.answering import *
 
 
 bot_obj = Bot(TELEGRAM_BOT_API_TOKEN)
@@ -64,6 +64,8 @@ seller_handler = ConversationHandler(
     persistent=True,
 )
 
+
+dp.add_handler(seller_handler)
 
 dp.add_handler(settings_handler)
 

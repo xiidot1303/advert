@@ -1,3 +1,4 @@
+from fastapi import FastAPI
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ConversationHandler
 
@@ -18,4 +19,24 @@ def settings(update, context):
     return ALL_SETTINGS
 
 def seller(update, context):
+    user = get_user_by_update(update)
+
+    #create an answer object
+    Answer.objects.create(user = user, answer='')
+    answer = Answer.objects.get(user = user, end = False)
+    
+    #back up questions
+    for q in Question.objects.filter(lang=user.lang).order_by('index'):
+        Backup_question.objects.create(user = user, question = q.question, variants = q.variants, index = q.index, answer = answer.pk)
+
+    question_obj = Question.objects.filter(lang=user.lang).order_by('index')[0]
+    text = question_obj.question
+    if question_obj.variants:
+        keyboards = get_variants_for_buttons(question_obj.variants)
+    else:
+        keyboards = []
+
+    keyboards.append([get_word('back')])
+    update.message.reply_text(text, reply_text = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
+    return ANSWERING
     

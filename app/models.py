@@ -24,7 +24,7 @@ class Question(models.Model):
 class Answer(models.Model):
     user = models.ForeignKey('Bot_user', null=True, blank=False, on_delete=models.PROTECT)
     questions = models.CharField(null=True, blank=True, max_length=3000)  #save questions by "/""
-    date = models.DateField(null=True, blank=True, max_length=20)
+    date = models.DateTimeField(null=True, blank=True, max_length=20)
     answer = models.CharField(null=True, blank=True, max_length=300)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
     end = models.BooleanField(null=True, blank=True, default=False) # completed answer or not
@@ -35,3 +35,12 @@ class Answer(models.Model):
 class Statement(models.Model):
     answer = models.ForeignKey('Answer', null=True, blank=False, on_delete=models.PROTECT)
     status = models.CharField(null=True, blank=True, max_length=20, choices=(('waiting', 'waiting'), ('cancelled', 'cancelled'), ('confirmed', 'confirmed')))
+
+
+class Backup_question(models.Model):
+    user = models.ForeignKey('Bot_user', null=True, blank=False, on_delete=models.PROTECT)
+    question = models.CharField(null=True, blank=True, max_length=500)
+    variants = models.CharField(null=True, blank=True, max_length=300)
+    index = models.IntegerField(null=True, blank=True)
+    answer = models.IntegerField(null=True, blank=True) #answer ID
+    

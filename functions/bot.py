@@ -55,3 +55,8 @@ def check_username(update):
         user.save()
     
 
+def get_variants_for_buttons(text):
+    l = list(str(text).split('//'))
+    l.remove('')
+    r_list = [[i] for i in l]
+    return r_list
