@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ConversationHandler
 
@@ -22,12 +22,12 @@ def seller(update, context):
     user = get_user_by_update(update)
 
     #create an answer object
-    Answer.objects.create(user = user, answer='')
+    Answer.objects.get_or_create(user = user, answer='', end = False)
     answer = Answer.objects.get(user = user, end = False)
     
     #back up questions
     for q in Question.objects.filter(lang=user.lang).order_by('index'):
-        Backup_question.objects.create(user = user, question = q.question, variants = q.variants, index = q.index, answer = answer.pk)
+        Backup_question.objects.create(user = user, question = q.question, variants = q.variants, index = q.index, req_photo = q.req_photo, answer = answer.pk)
 
     question_obj = Question.objects.filter(lang=user.lang).order_by('index')[0]
     text = question_obj.question
@@ -36,7 +36,7 @@ def seller(update, context):
     else:
         keyboards = []
 
-    keyboards.append([get_word('back')])
-    update.message.reply_text(text, reply_text = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
+    keyboards.append([get_word('back', update)])
+    update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
     return ANSWERING
     

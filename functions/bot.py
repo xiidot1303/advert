@@ -50,13 +50,46 @@ def get_user_by_update(update):
 
 def check_username(update):
     user = get_user_by_update(update)
-    if user.username != update.message.text:
-        user.username = update.message.text
+    if user.username != update.message.chat.username:
+        user.username = update.message.chat.username
         user.save()
     
 
 def get_variants_for_buttons(text):
     l = list(str(text).split('//'))
-    l.remove('')
+    try:
+        l.remove('')
+    except:
+        ok = True
     r_list = [[i] for i in l]
     return r_list
+
+def split_by_slash(text):
+    l = list(str(text).split('//'))
+    try:
+        l.remove('')
+    except:
+        ok = True
+    return l
+
+def compress_by_slash(l):
+    text_ = ''
+    for i in l:
+        text_ += i+'//'
+    return text_
+
+
+
+def get_current_answer_by_update(update):
+    user = get_user_by_update(update)
+    obj = Answer.objects.get(user=user, end=False)
+    return obj
+
+def get_backup_question(index, answer_pk):
+    obj = Backup_question.objects.get(index = index, answer = answer_pk)
+    return obj
+
+
+# make text photo 
+def photo():
+    return 'Po0enOIIJBUGERrftesUhio'

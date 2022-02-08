@@ -1,5 +1,6 @@
 from telegram import ReplyKeyboardMarkup, KeyboardButton
 import telegram
+from app.admin import Backup_questionAdmin
 from bot.uz_ru import lang_dict
 from app.models import *
 from telegram.ext import ConversationHandler
@@ -41,6 +42,11 @@ def is_start(func):    # This deco break registration if user send /start.
            data = update.data  
         id = update.message.chat.id
         if update.message.text == '/start' or data == 'main_menu' or update.message.text == get_word('main menu', update):
+            user = get_user_by_update(update)
+            for a in Answer.objects.filter(user=user, end = False):
+                for q in Backup_question.objects.filter(answer = a.pk):
+                    q.delete()
+                a.delete()
             main_menu(args[0], args[1])
             return ConversationHandler.END
         else:

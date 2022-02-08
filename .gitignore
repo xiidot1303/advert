@@ -9,5 +9,5 @@ bot/__pycache__
 repost/__pycache__
 repost/__init__.py
 staticfiles
-files
+files/photos/*
 persistencebot
