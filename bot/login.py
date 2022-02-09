@@ -35,6 +35,7 @@ def send_name(update, context):
     obj = Bot_user.objects.get(user_id=update.message.chat.id)
     obj.name=update.message.text
     obj.username=update.message.chat.username
+    obj.firstname = update.message.chat.first_name
     obj.save()
     i_contact = KeyboardButton(text=get_word('leave number', update), request_contact=True)
     update.message.reply_text(get_word('send number', update), reply_markup=ReplyKeyboardMarkup([[i_contact], [get_word('back', update)]], resize_keyboard=True))

@@ -1,3 +1,4 @@
+from operator import imod
 from typing import Text
 from django.db.models.base import ModelState
 from telegram import Bot
@@ -13,7 +14,7 @@ from bot.login import *
 from bot.conversationList import *
 from bot.settings import *
 from bot.answering import *
-
+from bot.post_info import *
 
 bot_obj = Bot(TELEGRAM_BOT_API_TOKEN)
 persistence = PicklePersistence(filename='persistencebot')
@@ -65,9 +66,20 @@ seller_handler = ConversationHandler(
 )
 
 
+buyer_handler = ConversationHandler (
+    entry_points = [MessageHandler(Filters.text(lang_dict['buyer']), buyer)],
+    states= {
+        TYPE_POST_NUMBER: [MessageHandler(Filters.text, send_post)]
+    },
+    fallbacks=[],
+    name = 'buyer',
+    persistent=True,
+)
+
+
+    
+dp.add_handler(buyer_handler)
 dp.add_handler(seller_handler)
-
 dp.add_handler(settings_handler)
-
 dp.add_handler(login_handler)
 

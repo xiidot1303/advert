@@ -52,9 +52,9 @@ lang_dict = {
     
     'completed answering': ["""So'rovnoma yakunlandi.""", """Опрос завершен."""],
     
-    '': ["""""", """"""],
+    'type post number': ["""Post raqamini kirting:""", """Введите номер поста:"""],
     
-    '': ["""""", """"""],
+    'incorrect post number': ["""Bunday post aniqlanmadi, boshqa raqam kiriting:""", """Такой пост не найден, введите другой номер:"""],
     
     '': ["""""", """"""],
     

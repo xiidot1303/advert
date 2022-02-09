@@ -1,5 +1,4 @@
 from datetime import datetime
-from platform import node
 from telegram import ReplyKeyboardMarkup, KeyboardButton
 import telegram
 from bot.uz_ru import lang_dict

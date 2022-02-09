@@ -12,7 +12,7 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'date', 'answer')
 
 class StatementAdmin(admin.ModelAdmin):
-    list_display = ('answer', 'status')
+    list_display = ('answer', 'status', 'pk')
 
 class Backup_questionAdmin(admin.ModelAdmin):
     list_display = ('user', 'question', 'variants', 'index', 'answer')

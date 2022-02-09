@@ -1,5 +1,5 @@
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ConversationHandler
 
 from app.models import *
@@ -40,3 +40,9 @@ def seller(update, context):
     update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
     return ANSWERING
     
+
+def buyer(update, context):
+    text = get_word('type post number', update)
+    keyboards = [[get_word('back', update)]]
+    update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard = keyboards, resize_keyboard=True))
+    return TYPE_POST_NUMBER
