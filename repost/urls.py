@@ -22,10 +22,16 @@ from django.conf.urls.static import static
 
 from config import *
 from app.views.botwebhook import bot_webhook
+from app.views.main import *
+from app.views.statement import *
 
 urlpatterns = [
     path('xiidot1303/', admin.site.urls),
     path(TELEGRAM_BOT_API_TOKEN, bot_webhook),
 
+    path('', main_menu, name='main_menu'),
+
+    #statement
+    path('statement/list', all_list, name='statement_list'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -29,6 +29,6 @@ def send_post(update, context):
         username = '@' + user.username
     else:
         username = '<a href="tg://user?id={}">{}</a>'.format(user.user_id, user.firstname)
-    update.message.reply_text(return_text.format(name=name, phone=phone, username=username))
+    update.message.reply_text(return_text.format(name=name, phone=phone, username=username), parse_mode=telegram.ParseMode.HTML)
     main_menu(update, context)
     return ConversationHandler.END

@@ -50,7 +50,7 @@ def get_user_by_update(update):
 
 def check_username(update):
     user = get_user_by_update(update)
-    print(update)
+    
     if user.username != update.message.chat.username:
         user.username = update.message.chat.username
         user.save()
