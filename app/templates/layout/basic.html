@@ -6,12 +6,15 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>{% block title %} {% endblock %}</title>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css" integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J" crossorigin="anonymous">
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
       
       <link rel="stylesheet" href="{% static 'assets/css/backend-plugin.min.css' %}">
-      <link rel="stylesheet" href="{% static 'assets/css/backend.css' %}">  </head>
+      <link rel="stylesheet" href="{% static 'assets/css/backend.css' %}">  
+    </head>
   <body class=" color-light ">
     <!-- loader Start -->
     <div id="loading">
@@ -48,11 +51,13 @@
                               <!-- <p class="mb-0 w-10 badge badge-pill badge-primary">6</p> -->
                           </a>
                       </li>
+
                       <li class="px-3 pt-3 pb-2">
                           <span class="text-uppercase small font-weight-bold">Посты </span>
                       </li>
+
                        <li class=" sidebar-layout">
-                          <a href="../app/user-profile.html" class="svg-icon">
+                          <a href="{% url 'statement_list' %}" class="svg-icon">
                               <i class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -60,6 +65,46 @@
                               </i><span class="ml-2">Заявления</span>
                           </a>
                       </li>
+
+                      <!-- -------------------------------------------------- -->
+                      
+                      <li class="sidebar-layout">
+                        <a href="#app6" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                            </i>
+                            <span class="ml-2">Вопросы </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon iq-arrow-right arrow-active" width="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <ul id="app6" class="submenu collapse" data-parent="#iq-sidebar-toggle">
+                            <li class=" sidebar-layout">
+                                <a href="../backend/pages-error.html" class="svg-icon">
+                                    <i class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                                          </svg>
+                                    </i>
+                                    <span class="ml-2">Список</span>
+                                </a>
+                            </li>
+                            <li class=" sidebar-layout">
+                                <a href="../backend/pages-error-500.html" class="svg-icon">
+                                    <i class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                          </svg>
+                                    </i>
+                                    <span class="ml-2">Добавить</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>   
+
+                    <!-- -------------------------------------------------------------------- -->
 
                   </ul>
               </nav>

@@ -26,10 +26,13 @@ def seller(update, context):
     answer = Answer.objects.get(user = user, end = False)
     
     #back up questions
-    for q in Question.objects.filter(lang=user.lang).order_by('index'):
-        Backup_question.objects.create(user = user, question = q.question, variants = q.variants, index = q.index, req_photo = q.req_photo, answer = answer.pk)
+    for q in Question.objects.all().order_by('index'):
+        if user.lang == 'uz':
+            Backup_question.objects.create(user = user, question = q.questionuz, variants = q.variantsuz, index = q.index, req_photo = q.req_photo, answer = answer.pk)
+        else:
+            Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, index = q.index, req_photo = q.req_photo, answer = answer.pk)
 
-    question_obj = Question.objects.filter(lang=user.lang).order_by('index')[0]
+    question_obj = Question.objects.all().order_by('index')[0]
     text = question_obj.question
     if question_obj.variants:
         keyboards = get_variants_for_buttons(question_obj.variants)

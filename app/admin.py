@@ -6,7 +6,7 @@ class Bot_userAdmin(admin.ModelAdmin):
     list_display = ('user_id', 'name', 'phone', 'lang')
     search_fields = ('user_id', 'name', 'phone')
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'variants', 'index', 'lang')
+    list_display = ('questionuz', 'questionru', 'variantsuz', 'variantsru', 'index')
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'date', 'answer')

@@ -17,10 +17,12 @@ class Bot_user(models.Model):
 
 
 class Question(models.Model):
-    question = models.CharField(null=True, blank=True, max_length=500)
-    variants = models.CharField(null=True, blank=True, max_length=300)
+    questionuz = models.CharField(null=True, blank=True, max_length=500)
+    questionru = models.CharField(null=True, blank=True, max_length=500)
+    variantsuz = models.CharField(null=True, blank=True, max_length=300)
+    variantsru = models.CharField(null=True, blank=True, max_length=300)
     index = models.IntegerField(null=True, blank=True)
-    lang = models.CharField(null=True, blank=True, max_length=10)
+    # lang = models.CharField(null=True, blank=True, max_length=10)
     req_photo = models.BooleanField(blank=True, null=True) # is required photo
 
 class Answer(models.Model):
