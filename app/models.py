@@ -22,7 +22,6 @@ class Question(models.Model):
     variantsuz = models.CharField(null=True, blank=True, max_length=300)
     variantsru = models.CharField(null=True, blank=True, max_length=300)
     index = models.IntegerField(null=True, blank=True)
-    # lang = models.CharField(null=True, blank=True, max_length=10)
     req_photo = models.BooleanField(blank=True, null=True) # is required photo
 
 class Answer(models.Model):

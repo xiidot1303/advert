@@ -20,6 +20,7 @@ import os
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView
+from app.views.question import QuestionCreateView
 
 from config import *
 from app.views.botwebhook import bot_webhook
@@ -36,5 +37,9 @@ urlpatterns = [
     #statement
     path('statement/list', list_statements, name='statement_list'),
     path('statement/confirm/<int:pk>/', confirm_statement, name='statement_confirm'),
+
+    #question
+    path('question/create', QuestionCreateView.as_view(), name = 'question_create'),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

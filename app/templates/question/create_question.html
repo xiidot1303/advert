@@ -1,0 +1,34 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+Добавить вопрос
+{% endblock %}
+
+{% block main %}
+
+<form action="">
+
+    {% csrf_token %}
+    
+    {% for field in form %}
+        {% if field.id_for_label == 'id_questionuz' or field.id_for_label == 'id_questionru' %}
+            <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}  {{ field }}
+            </div>
+        {% endif %}
+
+        {% if field.id_for_label == 'id_req_photo' %}
+        <div class="custom-control custom-switch custom-control-inline">
+            {{ field.errors }}
+            {{ field.label_tag }}  {{ field }}
+        </div>
+            
+        {% endif %}
+    {% endfor %}
+
+</form>
+
+{% endblock %}
