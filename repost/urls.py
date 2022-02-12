@@ -28,15 +28,19 @@ from app.views.main import *
 from app.views.statement import *
 
 urlpatterns = [
+    #main
     path('xiidot1303/', admin.site.urls),
     path(TELEGRAM_BOT_API_TOKEN, bot_webhook),
     path('accounts/login/', LoginView.as_view()),
-
     path('', main_menu, name='main_menu'),
+
+    # get file
+    path('files/photos/<str:folder>/<str:file>/', get_photos, name='get_photo'),
 
     #statement
     path('statement/list', list_statements, name='statement_list'),
     path('statement/confirm/<int:pk>/', confirm_statement, name='statement_confirm'),
+    path('statement/answers/<int:pk>', answer, name='statement_answer'),
 
     #question
     path('question/create', QuestionCreateView.as_view(), name = 'question_create'),

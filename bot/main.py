@@ -26,12 +26,13 @@ def seller(update, context):
     answer = Answer.objects.get(user = user, end = False)
     
     #back up questions
+    n = 1
     for q in Question.objects.all().order_by('index'):
         if user.lang == 'uz':
-            Backup_question.objects.create(user = user, question = q.questionuz, variants = q.variantsuz, index = q.index, req_photo = q.req_photo, answer = answer.pk)
+            Backup_question.objects.create(user = user, question = q.questionuz, variants = q.variantsuz, index = n, req_photo = q.req_photo, answer = answer.pk)
         else:
-            Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, index = q.index, req_photo = q.req_photo, answer = answer.pk)
-
+            Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, index = n, req_photo = q.req_photo, answer = answer.pk)
+        n += 1
     question_obj = Question.objects.all().order_by('index')[0]
     text = question_obj.question
     if question_obj.variants:

@@ -13,5 +13,6 @@ from app.forms import *
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'question/create_question.html'
     form_class = QuestionForm
-    success_url = '/question_detail/{id}'
+    # success_url = '/question_detail/{id}'
+    success_url = '/'
     

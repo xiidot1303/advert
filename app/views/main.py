@@ -6,3 +6,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def main_menu(request):
     return render(request, 'views/main.html')
+
+@login_required
+def get_photos(request, folder, file):
+    f = open('files/photos/{}/{}'.format(folder, file), 'rb')
+    return FileResponse(f)

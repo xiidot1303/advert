@@ -8,27 +8,69 @@
 
 {% block main %}
 
-<form action="">
+<form method = "post" enctype="multipart/form-data">
 
     {% csrf_token %}
-    
-    {% for field in form %}
-        {% if field.id_for_label == 'id_questionuz' or field.id_for_label == 'id_questionru' %}
+    <div class="row">
+        <div class="col">
             <div class="form-group">
-            {{ field.errors }}
-            {{ field.label_tag }}  {{ field }}
+                <label for="id_questionuz">Вопрос на Узбекском</label>
+                <textarea class="form-control" id="id_questionuz" name="questionuz" rows="3" style="width: 700px;"></textarea>
             </div>
-        {% endif %}
+        </div>    
+        <div class="col">
+            <div class="form-group">
+                <label for="id_questionru">Вопрос на Русском</label>
+                <textarea class="form-control" id="id_questionru" name="questionru" rows="3" style="width: 700px;"></textarea>
+            </div>
+        </div>    
 
-        {% if field.id_for_label == 'id_req_photo' %}
-        <div class="custom-control custom-switch custom-control-inline">
-            {{ field.errors }}
-            {{ field.label_tag }}  {{ field }}
+    </div>
+    <div class="row">
+
+        <div class="col">
+            <div class="form-group">
+                <label for="id_variantsuz">Варианты на Узбекском</label>
+                <input type="text" id="id_variantsuz" name="variantsuz" class="form-control" placeholder="variant1//variants2//variant3">
+            </div>
         </div>
-            
-        {% endif %}
-    {% endfor %}
 
+        <div class="col">
+            <div class="form-group">
+                <label for="id_variantsru">Варианты на Русском</label>
+                <input type="text" id="id_variantsru" name="variantsru" class="form-control" placeholder="variant1//variants2//variant3">
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="id_index">Индекс</label>
+                <input type="number" name="index" class="form-control form-control-sm" id="id_index" placeholder="порядок">
+            
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <div class="custom-control custom-switch custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="id_req_photo" name="req_photo" checked="">
+                    <label class="custom-control-label" for="id_req_photo">Ответ должен содержать с фотографиям</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
 </form>
 
 {% endblock %}

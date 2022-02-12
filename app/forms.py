@@ -20,6 +20,6 @@ class QuestionForm(ModelForm):
             'variantsuz': 'Варианты на Узбекском',
             'variantsru': 'Варианты на Русском', 
             'index': 'Индекс', 
-            'req_photo': 'Ответ должен быть с фотографий ', 
+            'req_photo': 'Ответ должен содержать  с фотографиям', 
         }
     field_order = ['questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo']
