@@ -19,7 +19,7 @@ import os
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView
-from app.views.question import QuestionCreateView
+from app.views.question import QuestionCreateView, QuestionEditView, question_list
 
 from config import *
 from app.views.botwebhook import bot_webhook
@@ -43,6 +43,8 @@ urlpatterns = [
 
     #question
     path('question/create', QuestionCreateView.as_view(), name = 'question_create'),
+    path('question/list', question_list, name='question_list'),
+    path('question/update/<int:pk>/', QuestionEditView.as_view(), name='question_update'),
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
