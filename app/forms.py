@@ -23,3 +23,8 @@ class QuestionForm(ModelForm):
             'req_photo': 'Ответ должен содержать  с фотографиям', 
         }
     field_order = ['questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo']
+
+
+class Profile(forms.Form):
+    username = forms.CharField(max_length=200, required=True)
+    password = forms.CharField(max_length=50, required=False)

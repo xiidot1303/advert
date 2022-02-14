@@ -15,13 +15,13 @@
         <div class="col">
             <div class="form-group">
                 <label for="id_questionuz">Вопрос на Узбекском</label>
-                <textarea required class="form-control" id="id_questionuz" name="questionuz" rows="3" style="width: 700px;"></textarea>
+                <textarea required class="form-control" id="id_questionuz" name="questionuz" rows="3" style="width: 700px;">{{ object.questionuz }}</textarea>
             </div>
         </div>    
         <div class="col">
             <div class="form-group">
                 <label for="id_questionru">Вопрос на Русском</label>
-                <textarea required class="form-control" id="id_questionru" name="questionru" rows="3" style="width: 700px;"></textarea>
+                <textarea required class="form-control" id="id_questionru" name="questionru" rows="3" style="width: 700px;">{{ object.questionru }}</textarea>
             </div>
         </div>    
 
@@ -31,14 +31,22 @@
         <div class="col">
             <div class="form-group">
                 <label for="id_variantsuz">Варианты на Узбекском</label>
-                <input type="text" id="id_variantsuz" name="variantsuz" class="form-control" placeholder="variant1//variants2//variant3">
+                {% if object.variantsru == None %}
+                <input value="" type="text" id="id_variantsuz" name="variantsuz" class="form-control" placeholder="variant1//variants2//variant3">
+                {% else %}
+                <input value="{{ object.variantsuz }}" type="text" id="id_variantsuz" name="variantsuz" class="form-control" placeholder="variant1//variants2//variant3">
+                {% endif %}
             </div>
         </div>
 
         <div class="col">
             <div class="form-group">
                 <label for="id_variantsru">Варианты на Русском</label>
-                <input type="text" id="id_variantsru" name="variantsru" class="form-control" placeholder="variant1//variants2//variant3">
+                {% if object.variantsru == None %}
+                <input value="" type="text" id="id_variantsru" name="variantsru" class="form-control" placeholder="variant1//variants2//variant3">
+                {% else %}
+                <input value="{{ object.variantsru }}" type="text" id="id_variantsru" name="variantsru" class="form-control" placeholder="variant1//variants2//variant3">
+                {% endif %}
             </div>
         </div>
         
@@ -48,7 +56,7 @@
         <div class="col">
             <div class="form-group">
                 <label for="id_index">Индекс</label>
-                <input required type="number" name="index" class="form-control form-control-sm" id="id_index" placeholder="порядок">
+                <input value="{{ object.index }}" type="number" name="index" class="form-control form-control-sm" id="id_index" placeholder="порядок">
             
             </div>
         </div>
@@ -62,14 +70,18 @@
         <div class="col">
             <div class="form-group">
                 <div class="custom-control custom-switch custom-control-inline">
+                    {% if object.req_photo == True %}
+                    <input type="checkbox" class="custom-control-input" id="id_req_photo" name="req_photo" checked>
+                    {% else %}
                     <input type="checkbox" class="custom-control-input" id="id_req_photo" name="req_photo">
+                    {% endif %}
                     <label class="custom-control-label" for="id_req_photo">Ответ должен содержать с фотографиям</label>
                 </div>
             </div>
         </div>
     </div>
     <div style="text-align: center;">
-        <button type="submit" class="btn btn-primary">Создать</button>
+        <button type="submit" class="btn btn-primary">Изменить</button>
     </div>
 </form>
 

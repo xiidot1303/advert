@@ -39,8 +39,16 @@
                            <div class="row">
                               <div class="col-lg-12">
                                  <div class="form-group">
-                                    <label class="text-secondary">Email</label>
-                                    <input class="form-control" type="text" placeholder="Email" name="username" required id="id_username">
+                                    {% if form.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                       <div class="iq-alert-text">
+                                          Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут быть чувствительны к регистру.
+                                          
+                                       </div>
+                                    </div>
+                                    {% endif %}
+                                    <label class="text-secondary">Username</label>
+                                    <input class="form-control" type="text" placeholder="Username" name="username" required id="id_username">
                                  </div>
                               </div>
                               <div class="col-lg-12 mt-2">

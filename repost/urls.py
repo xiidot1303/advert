@@ -19,7 +19,7 @@ import os
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView
-from app.views.question import QuestionCreateView, QuestionEditView, question_list
+from app.views.question import QuestionCreateView, QuestionEditView, question_delete, question_list
 
 from config import *
 from app.views.botwebhook import bot_webhook
@@ -30,8 +30,13 @@ urlpatterns = [
     #main
     path('xiidot1303/', admin.site.urls),
     path(TELEGRAM_BOT_API_TOKEN, bot_webhook),
-    path('accounts/login/', LoginView.as_view()),
     path('', main_menu, name='main_menu'),
+
+    #auth
+    path('accounts/login/', LoginView.as_view()),
+    path('changepassword/', PasswordChangeView.as_view(template_name = 'registration/change_password.html'), name='editpassword'),
+    path('changepassword/done/', PasswordChangeDoneView.as_view(template_name = 'registration/afterchanging.html'), name='password_change_done'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 
     # get file
     path('files/<str:folder>/<str:file>/', get_photos, name='get_photo'),
@@ -45,6 +50,6 @@ urlpatterns = [
     path('question/create', QuestionCreateView.as_view(), name = 'question_create'),
     path('question/list', question_list, name='question_list'),
     path('question/update/<int:pk>/', QuestionEditView.as_view(), name='question_update'),
-
+    path('question/delete/<int:pk>/', question_delete, name = 'question_delete'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
