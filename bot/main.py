@@ -33,7 +33,7 @@ def seller(update, context):
         else:
             Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, index = n, req_photo = q.req_photo, answer = answer.pk)
         n += 1
-    question_obj = Question.objects.all().order_by('index')[0]
+    question_obj = Backup_question.objects.filter(user=user, answer = answer.pk).order_by('index')[0]
     text = question_obj.question
     if question_obj.variants:
         keyboards = get_variants_for_buttons(question_obj.variants)

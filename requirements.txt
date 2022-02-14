@@ -1,5 +1,5 @@
 python-telegram-bot
-django
+Django=="3.2.9"
 python-dotenv
 requests
 datetime
