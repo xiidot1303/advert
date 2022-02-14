@@ -3,3 +3,6 @@ django
 python-dotenv
 requests
 datetime
+psycopg2
+gunicorn
+pipenv
