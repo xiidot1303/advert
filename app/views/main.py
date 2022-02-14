@@ -9,5 +9,5 @@ def main_menu(request):
 
 @login_required
 def get_photos(request, folder, file):
-    f = open('files/photos/{}/{}'.format(folder, file), 'rb')
+    f = open('files/{}/{}'.format(folder, file), 'rb')
     return FileResponse(f)

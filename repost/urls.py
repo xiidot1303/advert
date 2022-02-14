@@ -34,7 +34,7 @@ urlpatterns = [
     path('', main_menu, name='main_menu'),
 
     # get file
-    path('files/photos/<str:folder>/<str:file>/', get_photos, name='get_photo'),
+    path('files/<str:folder>/<str:file>/', get_photos, name='get_photo'),
 
     #statement
     path('statement/list', list_statements, name='statement_list'),
