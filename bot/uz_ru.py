@@ -50,7 +50,7 @@ lang_dict = {
     
     'send photo': ["""Iltimos rasm yuboring!""", """Пожалуйста, отправьте фото!"""],
     
-    'completed answering': ["""So'rovnoma yakunlandi.""", """Опрос завершен."""],
+    'completed answering': ["""Rahmat! Sizning so'rovingiz qabul qilindi va tez orada ko'rib chiqiladi""", """Спасибо! Ваша заявка принята и будет опубликована после модерации"""],
     
     'type post number': ["""Post raqamini kirting:""", """Введите номер поста:"""],
     

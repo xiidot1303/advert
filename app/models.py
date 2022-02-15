@@ -1,4 +1,5 @@
 
+from pyexpat import model
 from django.db import models
 
 class Bot_user(models.Model):
@@ -47,4 +48,6 @@ class Backup_question(models.Model):
     index = models.IntegerField(null=True, blank=True)
     req_photo = models.BooleanField(blank=True, null=True)   # is required photo
     answer = models.IntegerField(null=True, blank=True) #answer ID
+    
+class Group(models.Model):
     
