@@ -22,13 +22,15 @@ def send_post(update, context):
         return TYPE_POST_NUMBER
     answer_obj = st_obj.answer
     user = answer_obj.user
-    return_text = '{name}\n{phone}\n{username}'
+    return_text = '{text_name}: {name}\n{text_phone}: {phone}\n{text_username}: {username}'
     name = user.name
     phone = user.phone
     if user.username:
         username = '@' + user.username
     else:
         username = '<a href="tg://user?id={}">{}</a>'.format(user.user_id, user.firstname)
-    update.message.reply_text(return_text.format(name=name, phone=phone, username=username), parse_mode=telegram.ParseMode.HTML)
+    update.message.reply_text(return_text.format(text_name = get_word('name', update), name=name, 
+        text_phone=get_word('phone number', update), phone=phone, 
+        text_username='🆔 Username', username=username), parse_mode=telegram.ParseMode.HTML)
     main_menu(update, context)
     return ConversationHandler.END

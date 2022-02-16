@@ -106,6 +106,39 @@
 
                     <!-- -------------------------------------------------------------------- -->
 
+                    <li class="px-3 pt-3 pb-2">
+                        <span class="text-uppercase small font-weight-bold">Настройки</span>
+                    </li>
+
+
+                    <li class="sidebar-layout">
+                        <a href="#app7" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                  </svg>
+                            </i>
+                            <span class="ml-2">Оплата </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon iq-arrow-right arrow-active" width="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <ul id="app7" class="submenu collapse" data-parent="#iq-sidebar-toggle">
+
+
+                            <li class=" sidebar-layout">
+                                <a href="{% url 'payment_update' 1 %}" class="svg-icon">
+                                    <i class="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                          </svg>
+                                    </i><span class="ml-2">Изменить</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- -------------------------------------------------------------------------------------------- -->
+
                   </ul>
               </nav>
               <div class="pt-5 pb-5"></div>

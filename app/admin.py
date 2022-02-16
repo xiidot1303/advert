@@ -17,8 +17,17 @@ class StatementAdmin(admin.ModelAdmin):
 class Backup_questionAdmin(admin.ModelAdmin):
     list_display = ('user', 'question', 'variants', 'index', 'answer')
 
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('group_id', 'name')
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('text', 'card')
+
+
 admin.site.register(Bot_user, Bot_userAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Statement, StatementAdmin)
 admin.site.register(Backup_question, Backup_questionAdmin)
+admin.site.register(Group, GroupAdmin)
+admin.site.register(Payment, PaymentAdmin)

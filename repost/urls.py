@@ -19,6 +19,7 @@ import os
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeDoneView, PasswordChangeView
+from app.views.payment import PaymentEditView
 from app.views.question import QuestionCreateView, QuestionEditView, question_delete, question_list
 
 from config import *
@@ -51,5 +52,8 @@ urlpatterns = [
     path('question/list', question_list, name='question_list'),
     path('question/update/<int:pk>/', QuestionEditView.as_view(), name='question_update'),
     path('question/delete/<int:pk>/', question_delete, name = 'question_delete'),
+
+    #settings
+    path('payment/update/<int:pk>/', PaymentEditView.as_view(), name = 'payment_update'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

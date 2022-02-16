@@ -30,9 +30,11 @@ def seller(update, context):
     n = 1
     for q in Question.objects.all().order_by('index'):
         if user.lang == 'uz':
-            Backup_question.objects.create(user = user, question = q.questionuz, variants = q.variantsuz, index = n, req_photo = q.req_photo, answer = answer.pk)
+            Backup_question.objects.create(user = user, question = q.questionuz, variants = q.variantsuz, 
+                index = n, req_photo = q.req_photo, is_required = q.is_required, answer = answer.pk)
         else:
-            Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, index = n, req_photo = q.req_photo, answer = answer.pk)
+            Backup_question.objects.create(user = user, question = q.questionru, variants = q.variantsru, 
+                index = n, req_photo = q.req_photo, is_required = q.is_required, answer = answer.pk)
         n += 1
     question_obj = Backup_question.objects.filter(user=user, answer = answer.pk).order_by('index')[0]
     text = question_obj.question
@@ -40,7 +42,8 @@ def seller(update, context):
         keyboards = get_variants_for_buttons(question_obj.variants)
     else:
         keyboards = []
-
+    if not question_obj.is_required:
+        keyboards.append([get_word('skip', update)])
     keyboards.append([get_word('back', update)])
     update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
     return ANSWERING

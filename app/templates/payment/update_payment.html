@@ -1,0 +1,32 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+Изменения номера карта
+{% endblock %}
+
+{% block main %}
+
+<form method = "post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="id_card">Номер карта</label>
+                <input value="{{ object.card }}" type="text" name="card" class="form-control" id="id_card">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </div>
+</form>
+
+{% endblock %}

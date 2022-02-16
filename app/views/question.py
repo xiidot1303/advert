@@ -7,7 +7,7 @@ from app.models import *
 from app.forms import *
 
 
-
+@login_required
 def question_list(request):
     questions = Question.objects.all().order_by('index')
     context = {'questions': questions}

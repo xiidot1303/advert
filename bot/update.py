@@ -59,6 +59,7 @@ seller_handler = ConversationHandler(
     entry_points = [MessageHandler(Filters.text(lang_dict['seller']), seller)],
     states = {
         ANSWERING: [MessageHandler(Filters.text, loop_answering), MessageHandler(Filters.photo, loop_answering)],
+        ASK_PAYMENT: [MessageHandler(Filters.text, ask_payment), MessageHandler(Filters.photo, ask_payment)],
     },
     fallbacks=[],
     name = 'seller',

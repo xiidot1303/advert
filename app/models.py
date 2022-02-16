@@ -23,6 +23,7 @@ class Question(models.Model):
     variantsru = models.CharField(null=True, blank=True, max_length=300)
     index = models.IntegerField(null=True, blank=True)
     req_photo = models.BooleanField(blank=True, null=True) # is required photo
+    is_required = models.BooleanField(blank=True, null=True) #  is required answer
 
 class Answer(models.Model):
     user = models.ForeignKey('Bot_user', null=True, blank=False, on_delete=models.PROTECT)
@@ -48,6 +49,7 @@ class Backup_question(models.Model):
     variants = models.CharField(null=True, blank=True, max_length=300)
     index = models.IntegerField(null=True, blank=True)
     req_photo = models.BooleanField(blank=True, null=True)   # is required photo
+    is_required = models.BooleanField(blank=True, null=True) #  is required answer
     answer = models.IntegerField(null=True, blank=True) #answer ID
     
 class Group(models.Model):

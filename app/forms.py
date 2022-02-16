@@ -1,3 +1,5 @@
+from cProfile import label
+from attr import fields
 from django.forms import ModelForm, widgets
 from app.models import *
 from django import forms
@@ -5,7 +7,7 @@ from django import forms
 class QuestionForm(ModelForm):
     class Meta:
         model = Question
-        fields = {'questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo'}
+        fields = {'questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo', 'is_required'}
         widgets = {
             'questionuz': forms.Textarea(attrs={'class': 'form-control'}),
             'questionru': forms.Textarea(attrs={'class': 'form-control'}), 
@@ -13,6 +15,7 @@ class QuestionForm(ModelForm):
             'variantsru': forms.TextInput(attrs={'class': 'form-control'}),  
             'index': forms.TextInput(attrs={'class': 'form-control'}), 
             'req_photo': forms.CheckboxInput(attrs={'class': 'custom-control-input'}),
+            'is_required': forms.CheckboxInput(attrs={'class': 'custom-control-input'}),
         }
         labels = {
             'questionuz': 'Вопрос на Узбекском',
@@ -21,9 +24,21 @@ class QuestionForm(ModelForm):
             'variantsru': 'Варианты на Русском', 
             'index': 'Индекс', 
             'req_photo': 'Ответ должен содержать  с фотографиям', 
+            'is_required': 'Обязательное поле',
         }
-    field_order = ['questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo']
+    field_order = ['questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo', 'is_required']
 
+class PaymentForm(ModelForm):
+    class Meta:
+        model = Payment
+        fields = {'card'}
+        widgets = {
+            'card': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'card': 'Номер карта',
+        }
+    
 
 class Profile(forms.Form):
     username = forms.CharField(max_length=200, required=True)

@@ -10,4 +10,5 @@ repost/__pycache__
 repost/__init__.py
 staticfiles
 files/photos/*
+files/payment/*
 persistencebot
