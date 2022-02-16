@@ -1,5 +1,3 @@
-from cProfile import label
-from attr import fields
 from django.forms import ModelForm, widgets
 from app.models import *
 from django import forms
