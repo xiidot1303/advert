@@ -1,5 +1,4 @@
-
-from pyexpat import model
+from statistics import mode
 from django.db import models
 
 class Bot_user(models.Model):
@@ -31,6 +30,8 @@ class Answer(models.Model):
     date = models.DateTimeField(null=True, blank=True, max_length=20)
     answer = models.CharField(null=True, blank=True, max_length=300)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
+    payment = models.FileField(upload_to='payment/', null=True, blank=True)
+    
     end = models.BooleanField(null=True, blank=True, default=False) # completed answer or not
 
     # def __str__(self) -> str:
@@ -50,4 +51,9 @@ class Backup_question(models.Model):
     answer = models.IntegerField(null=True, blank=True) #answer ID
     
 class Group(models.Model):
-    
+    group_id = models.IntegerField(null=True)
+    name = models.CharField(null=True, blank=True, max_length=500)
+
+class Payment(models.Model):
+    text = models.CharField(null=True, blank=True, max_length=1000)
+    card = models.CharField(null=True, blank=True, max_length=50)

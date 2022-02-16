@@ -7,6 +7,7 @@ from bot.conversationList import SELECT_LANG
 from functions.bot import *
 
 def start(update, context):
+    
     if is_registered(update.message.chat.id):
         main_menu(update, context)
     else:
