@@ -89,7 +89,12 @@ def loop_answering(update, context):
         # end answering
         answer_obj.save()
         payment_obj = Payment.objects.get(pk=1)
-        text = get_word('payment', update)
+        user = get_user_by_update(update)
+        if user.lang == 'uz':
+            text = payment_obj.textuz
+        else:
+            text = payment_obj.textru
+
         card = payment_obj.card
         keyboards = []
         keyboards.append([get_word('back', update)])

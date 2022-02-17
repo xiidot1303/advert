@@ -56,5 +56,6 @@ class Group(models.Model):
     name = models.CharField(null=True, blank=True, max_length=500)
 
 class Payment(models.Model):
-    text = models.CharField(null=True, blank=True, max_length=1000)
+    textuz = models.CharField(null=True, blank=True, max_length=1000)
+    textru = models.CharField(null=True, blank=True, max_length=1000)
     card = models.CharField(null=True, blank=True, max_length=50)

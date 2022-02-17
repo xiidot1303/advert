@@ -1,0 +1,33 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+Изменения ID группу
+{% endblock %}
+
+{% block main %}
+
+<form method = "post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="id_group_id">ID</label>
+                <input value="{{ object.group_id }}" type="text" name="group_id" class="form-control" id="id_group_id">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </div>
+</form>
+
+{% endblock %}

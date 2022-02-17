@@ -1,5 +1,3 @@
-from cmath import log
-from unicodedata import name
 from django.http import HttpResponse, FileResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -51,15 +49,15 @@ def confirm_statement(request, pk):
             text += '{}: <i>{}</i>\n'.format(q.question, answers[n])
 
         n += 1
-
+    group = Group.objects.get(pk=1).group_id
     # try:
     if True:
         i_go = InlineKeyboardButton(text = 'Перейти бот', url=BOT_URL)
         markup = InlineKeyboardMarkup([[i_go]])
         if photo:
-            bot.sendPhoto(chat_id=int(GROUP), photo=photo, caption=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
+            bot.sendPhoto(chat_id=group, photo=photo, caption=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
         else:
-            bot.sendMessage(chat_id=int(GROUP), text=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
+            bot.sendMessage(chat_id=group, text=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
     # except:
     #     error = True
     obj.save()

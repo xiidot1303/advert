@@ -21,7 +21,7 @@ class GroupAdmin(admin.ModelAdmin):
     list_display = ('group_id', 'name')
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('text', 'card')
+    list_display = ('textru', 'textuz','card')
 
 
 admin.site.register(Bot_user, Bot_userAdmin)

@@ -1,3 +1,4 @@
+from attr import field
 from django.forms import ModelForm, widgets
 from app.models import *
 from django import forms
@@ -29,14 +30,28 @@ class QuestionForm(ModelForm):
 class PaymentForm(ModelForm):
     class Meta:
         model = Payment
-        fields = {'card'}
+        fields = {'textru', 'textuz', 'card'}
         widgets = {
             'card': forms.TextInput(attrs={'class': 'form-control'}),
         }
         labels = {
             'card': 'Номер карта',
         }
-    
+    field_order = ['textru', 'textuz' , 'card']
+
+class GroupForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = {'group_id'}
+        widgets = {
+            'group_id': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'group_id': 'ID'
+        }
+
+
 
 class Profile(forms.Form):
     username = forms.CharField(max_length=200, required=True)
