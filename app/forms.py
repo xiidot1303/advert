@@ -1,4 +1,3 @@
-from attr import field
 from django.forms import ModelForm, widgets
 from app.models import *
 from django import forms
