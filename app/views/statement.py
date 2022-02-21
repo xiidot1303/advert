@@ -15,6 +15,13 @@ def list_statements(request):
     return render(request, 'statement/list.html', context)
 
 
+def shared_statements(request):
+    sts = Statement.objects.filter(status = 'confirmed').order_by('-pk')
+    context = {'list': sts}
+    return render(request, 'statement/shared.html', context)
+
+
+
 @login_required
 def answer(request, pk):
     answer_obj = Answer.objects.get(pk=pk)

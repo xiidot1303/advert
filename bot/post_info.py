@@ -32,5 +32,7 @@ def send_post(update, context):
     update.message.reply_text(return_text.format(text_name = get_word('name', update), name=name, 
         text_phone=get_word('phone number', update), phone=phone, 
         text_username='🆔 Username', username=username), parse_mode=telegram.ParseMode.HTML)
+    st_obj.views += 1
+    st_obj.save()
     main_menu(update, context)
     return ConversationHandler.END

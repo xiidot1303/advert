@@ -40,7 +40,7 @@ class Answer(models.Model):
 class Statement(models.Model):
     answer = models.ForeignKey('Answer', null=True, blank=False, on_delete=models.PROTECT)
     status = models.CharField(null=True, blank=True, max_length=20, choices=(('waiting', 'waiting'), ('cancelled', 'cancelled'), ('confirmed', 'confirmed')))
-
+    views = models.IntegerField(null=True, blank=True, default=0)
 
 class Backup_question(models.Model):
     user = models.ForeignKey('Bot_user', null=True, blank=False, on_delete=models.PROTECT)

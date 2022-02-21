@@ -47,6 +47,9 @@ urlpatterns = [
     path('statement/list', list_statements, name='statement_list'),
     path('statement/confirm/<int:pk>/', confirm_statement, name='statement_confirm'),
     path('statement/answers/<int:pk>', answer, name='statement_answer'),
+    path('statement/shared', shared_statements, name='statement_shared'),
+
+
 
     #question
     path('question/create', QuestionCreateView.as_view(), name = 'question_create'),
