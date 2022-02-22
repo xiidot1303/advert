@@ -1,0 +1,46 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+{% load functions %}
+
+{% block title %}
+Пользователи
+{% endblock %}
+
+
+{% block main %}
+<h4 class="font-weight-bold" style="margin-bottom: 30px;">Пользователи</h4>
+<table id="datatable" class="table data-table table-striped table-bordered" >
+    <thead>
+       <tr>
+          <th>№</th>
+          <th>ID</th>
+          <th>Имя</th>
+          <th>Номер телефона</th>
+          <th>Username</th>
+          <th>Дата</th>
+
+       </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+       <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ u.user_id }}</td>
+            <td>{{ u.name }}</td>
+            <td>{{ u.phone }}</td>
+            <td>
+                {% if u.username %}
+                <a href="https://t.me/{{ u.username }}">@{{ u.username }}</a>
+                {% else %}
+                <a href="tg://user?id={{ u.user_id }}">{{ u.firstname }}</a>
+                {% endif %}
+            </td>
+            <td>{{ u.date|date:"d/m/Y H:i" }}</td>
+
+            </td>
+       </tr>
+       {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

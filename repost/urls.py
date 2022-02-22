@@ -27,6 +27,7 @@ from config import *
 from app.views.botwebhook import bot_webhook
 from app.views.main import *
 from app.views.statement import *
+from app.views.statistic import *
 
 urlpatterns = [
     #main
@@ -61,6 +62,7 @@ urlpatterns = [
     path('payment/update/<int:pk>/', PaymentEditView.as_view(), name = 'payment_update'),
     path('group/update/<int:pk>/', GroupEditView.as_view(), name = 'group_update'),
 
-
+    #statistic
+    path('statistic/users', bot_users, name='statistic_users'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
