@@ -34,5 +34,8 @@ def send_post(update, context):
         text_username='🆔 Username', username=username), parse_mode=telegram.ParseMode.HTML)
     st_obj.views += 1
     st_obj.save()
+    client = get_user_by_update(update)
+    client.is_client = True
+    client.save()
     main_menu(update, context)
     return ConversationHandler.END

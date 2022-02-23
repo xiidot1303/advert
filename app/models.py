@@ -8,6 +8,7 @@ class Bot_user(models.Model):
     phone = models.CharField(null=True, blank=True, max_length=40)
     lang = models.CharField(null=True, blank=True, max_length=5)
     date = models.DateTimeField(db_index = True, null=True, auto_now_add=True, blank=True)
+    is_client = models.BooleanField(blank=True, null=True)
     def __str__(self) -> str:
         try:
             return self.username + ' ' + str(self.user_id)
