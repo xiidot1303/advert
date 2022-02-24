@@ -21,7 +21,7 @@ def main_menu(request):
     amount_bot_users = [count_bot_users, count_daily_bot_users]
 
     amount_bot_clients = len(Bot_user.objects.filter(is_client=True))
-
+    amount_posts = len(Statement.objects.filter(status='confirmed'))
 
     def make_date(obj):
         obj = obj + timedelta(hours=5)
@@ -34,7 +34,12 @@ def main_menu(request):
     
     posts_by_date = list(map(lambda l: int(l[1]), list(Statement.objects.filter(status='confirmed').annotate(answer__day=TruncDay('answer__date')).values('answer__day').annotate(c=Count('id')).values_list('answer__day', 'c'))))
 
-    context = {'amount_bot_users': amount_bot_users, 'amount_bot_clients': amount_bot_clients, 'bot_users_by_date': bot_users_by_date, 'dates_users': dates_users, 'posts_by_date': posts_by_date, 'dates_posts': dates_posts}
+
+    most_viewed_posts = Statement.objects.filter(status='confirmed').order_by('-views')[:10]
+
+    context = {'amount_bot_users': amount_bot_users, 'amount_bot_clients': amount_bot_clients, 'amount_posts': amount_posts, 
+    'bot_users_by_date': bot_users_by_date, 'dates_users': dates_users, 'posts_by_date': posts_by_date, 'dates_posts': dates_posts, 
+    'most_viewed_posts': most_viewed_posts}
     return render(request, 'views/main.html', context)
 
 @login_required

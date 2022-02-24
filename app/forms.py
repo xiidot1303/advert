@@ -52,6 +52,6 @@ class GroupForm(ModelForm):
 
 
 
-class Profile(forms.Form):
+class ProfileForm(forms.Form):
     username = forms.CharField(max_length=200, required=True)
-    password = forms.CharField(max_length=50, required=False)
+    email = forms.CharField(max_length=200, required=False)

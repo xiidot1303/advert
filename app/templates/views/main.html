@@ -1,7 +1,7 @@
 {% extends 'layout/basic.html' %}
 
 {% load static %}
-
+{% load index %}
 {% block title %}
 Главное меню
 {% endblock %}
@@ -11,8 +11,8 @@
 
 <div class="col-md-12 mb-4 mt-1">
     <div class="d-flex flex-wrap justify-content-between align-items-center">
-        <h4 class="font-weight-bold">Overview</h4>
-        <div class="form-group mb-0 vanila-daterangepicker d-flex flex-row">
+        <h4 class="font-weight-bold">Обзор</h4>
+        <!-- <div class="form-group mb-0 vanila-daterangepicker d-flex flex-row">
              <div class="date-icon-set">
                 <input type="text" name="start" class="form-control" placeholder="From Date">
                 <span class="search-link">
@@ -32,7 +32,7 @@
                    </svg>
                 </span>
              </div>                  
-       </div>
+       </div> -->
     </div>
  </div>
  <div class="col-lg-8 col-md-12">
@@ -42,10 +42,10 @@
              <div class="card-body">
                 <div class="d-flex align-items-center">
                    <div class="">
-                       <p class="mb-2 text-secondary">Total Profit</p>
+                       <p class="mb-2 text-secondary">Пользователи</p>
                        <div class="d-flex flex-wrap justify-content-start align-items-center">
-                          <h5 class="mb-0 font-weight-bold">$95,595</h5>
-                          <p class="mb-0 ml-3 text-success font-weight-bold">+3.55%</p>
+                          <h5 class="mb-0 font-weight-bold">{{ amount_bot_users|index:0 }}</h5>
+                          <!-- <p class="mb-0 ml-3 text-success font-weight-bold">+3.55%</p> -->
                        </div>                            
                    </div>
                 </div>
@@ -57,10 +57,10 @@
            <div class="card-body">
                <div class="d-flex align-items-center">
                    <div class="">
-                       <p class="mb-2 text-secondary">Total Expenses</p>
+                       <p class="mb-2 text-secondary">Клиенты</p>
                        <div class="d-flex flex-wrap justify-content-start align-items-center">
-                          <h5 class="mb-0 font-weight-bold">$12,789</h5>
-                          <p class="mb-0 ml-3 text-success font-weight-bold">+2.67%</p>
+                          <h5 class="mb-0 font-weight-bold">{{ amount_bot_clients }}</h5>
+                          <!-- <p class="mb-0 ml-3 text-success font-weight-bold">+2.67%</p> -->
                        </div>                            
                    </div>
                </div>
@@ -72,10 +72,10 @@
            <div class="card-body">
                <div class="d-flex align-items-center">
                    <div class="">
-                      <p class="mb-2 text-secondary">New Users</p>
+                      <p class="mb-2 text-secondary">Посты</p>
                       <div class="d-flex flex-wrap justify-content-start align-items-center">
-                         <h5 class="mb-0 font-weight-bold">13,984</h5>
-                         <p class="mb-0 ml-3 text-danger font-weight-bold">-9.98%</p>
+                         <h5 class="mb-0 font-weight-bold">{{ amount_posts }}</h5>
+                         <!-- <p class="mb-0 ml-3 text-danger font-weight-bold">-9.98%</p> -->
                       </div>                            
                    </div>
                </div>
@@ -89,7 +89,7 @@
        <div class="card">
            <div class="card-body">
              <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <h4 class="font-weight-bold">uers</h4>
+                <h4 class="font-weight-bold">Новые пользователи (по дням)</h4>
                 <div class="d-flex justify-content-between align-items-center">
 
                 </div>
@@ -104,7 +104,7 @@
        <div class="card">
            <div class="card-body">
              <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <h4 class="font-weight-bold">posts</h4>
+                <h4 class="font-weight-bold">Количество постов (по дням)</h4>
                 <div class="d-flex justify-content-between align-items-center">
 
                 </div>
@@ -122,117 +122,28 @@
     <div class="card card-block card-stretch card-height">
        <div class="card-header card-header-border d-flex justify-content-between">
           <div class="header-title">
-             <h4 class="card-title">Most viewd posts</h4>
+             <h4 class="card-title">Просматриваемые посты</h4>
           </div>
        </div>
        <div class="card-body-list">               
           <ul class="list-style-3 mb-0">
+
+            {% for post in most_viewed_posts %}
              <li class="p-3 list-item d-flex justify-content-start align-items-center">
                 <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/1.jpg" alt="1.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Rockerz Bluetooth Headset</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,056</h6>                        
-                </div>
-             </li>
-             <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
-                </div>
-             </li>
 
-                          <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
+                   <img class="avatar avatar-img avatar-60 rounded" src=".././../../files/{{ post.answer.photo }}" alt="">  
+                   
+                                         
                 </div>
                 <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
+                   <p class="mb-0">#{{ post.id }} / {{ post.answer.user.name }}</p>
                 </div>
                 <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
+                   <h6 class="font-weight-bold"><i class="fas fa-eye"></i> {{ post.views }}</h6>                        
                 </div>
              </li>
-
-                          <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
-                </div>
-             </li>
-
-                          <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
-                </div>
-             </li>
-
-                          <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
-                </div>
-             </li>
-
-                          <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/2.jpg" alt="2.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Wifi Security Camera</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,799</h6>                        
-                </div>
-             </li>
-
-             
-             <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/13.jpg" alt="3.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Stone Bluetooth Speaker</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$1,099</h6>                        
-                </div>
-             </li>
-             <li class="p-3 list-item d-flex justify-content-start align-items-center">
-                <div class="avatar">
-                   <img class="avatar avatar-img avatar-60 rounded" src="../assets/images/products/4.jpg" alt="4.jpg">                        
-                </div>
-                <div class="list-style-detail ml-3 mr-2">
-                   <p class="mb-0">Ryzen 5 Hexa Core 5600H</p>
-                </div>
-                <div class="list-style-action d-flex justify-content-end ml-auto">                        
-                   <h6 class="font-weight-bold">$9,999</h6>                        
-                </div>
-             </li>
+             {% endfor %}
           </ul>
        </div>
     </div>
