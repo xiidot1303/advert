@@ -57,16 +57,16 @@ def confirm_statement(request, pk):
 
         n += 1
     group = Group.objects.get(pk=1).group_id
-    # try:
-    if True:
+    try:
+    # if True:
         i_go = InlineKeyboardButton(text = 'Перейти бот', url=BOT_URL)
         markup = InlineKeyboardMarkup([[i_go]])
         if photo:
             bot.sendPhoto(chat_id=group, photo=photo, caption=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
         else:
             bot.sendMessage(chat_id=group, text=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
-    # except:
-    #     error = True
+    except:
+        error = True
     obj.save()
     return redirect(list_statements)
 
