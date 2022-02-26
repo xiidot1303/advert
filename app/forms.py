@@ -51,7 +51,25 @@ class GroupForm(ModelForm):
         }
 
 
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = {'users', 'all', 'text', 'photo'}
+        labels = {
+            'users': 'Пользователи',
+            'all': 'Все',
+            'text': 'Текст',
+            'photo': 'Фото'
+        }
 
+        widgets = {
+            'users': forms.Select(attrs={'class': 'form-control'}),
+            'all': forms.CheckboxInput(attrs={'class': 'custom-control-input'}),
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'photo': forms.FileInput(attrs={'class': 'custom-file-input'})
+        }
+
+    field_order = {'all', 'users', 'text', 'photo'}
 class ProfileForm(forms.Form):
     username = forms.CharField(max_length=200, required=True)
     email = forms.CharField(max_length=200, required=False)

@@ -1,0 +1,35 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+Добавить вопрос
+{% endblock %}
+
+{% block main %}
+
+
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+    {% for f in form %}
+
+        {% if forloop.counter0 == 2 %}
+        </div>
+        <div class="row">
+        {% else %}
+        {% endif %}
+        <div class="col">
+            <div class="form-group">
+                {{ f.errors }} 
+                {{ f.label_tag }}    {{ f }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+</form>
+
+
+{% endblock %}

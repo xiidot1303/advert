@@ -11,7 +11,7 @@ class Bot_user(models.Model):
     is_client = models.BooleanField(blank=True, null=True)
     def __str__(self) -> str:
         try:
-            return self.username + ' ' + str(self.user_id)
+            return self.name + ' ' + str(self.phone)
         except:
             return super().__str__()
 
@@ -60,3 +60,9 @@ class Payment(models.Model):
     textuz = models.CharField(null=True, blank=True, max_length=1000)
     textru = models.CharField(null=True, blank=True, max_length=1000)
     card = models.CharField(null=True, blank=True, max_length=50)
+
+class Message(models.Model):
+    users = models.ManyToManyField('Bot_user')
+    all = models.BooleanField(blank=True, null=True)
+    text = models.TextField(blank=True, null=True, max_length=1000)
+    photo = models.FileField(upload_to='messages/', null=True, blank=True)
