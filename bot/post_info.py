@@ -35,8 +35,10 @@ def send_post(update, context):
             post_info += '{}: <i>{}</i>\n'.format(q.question, answers[n])
 
         n += 1
-
-    bot.send_message(update.message.chat.id, post_info, parse_mode=telegram.ParseMode.HTML)
+    if answer_obj.photo:
+        bot.send_photo(chat_id=update.message.chat.id, photo = answer_obj.photo, caption=post_info, parse_mode=telegram.ParseMode.HTML)
+    else:
+        bot.send_message(update.message.chat.id, post_info, parse_mode=telegram.ParseMode.HTML)
     # user info
     user_info = '{text_name}: {name}\n{text_phone}: {phone}\n{text_username}: {username}'
     name = user.name
