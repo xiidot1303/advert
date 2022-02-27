@@ -1,4 +1,4 @@
-from django.forms import ModelForm, widgets
+from django.forms import ModelForm, widgets, ModelMultipleChoiceField
 from app.models import *
 from django import forms
 
@@ -51,7 +51,24 @@ class GroupForm(ModelForm):
         }
 
 
+
+
+
+
+class ModelCommaSeparatedChoiceField(ModelMultipleChoiceField):
+    widget = forms.SelectMultiple(attrs={'class': 'custom-select form-control choicesjs', 'multiple': True})
+    def clean(self, value):
+        if value is not None:
+            print(value)
+            value = [item.strip() for item in value.split(",")] # remove padding
+        return super(ModelCommaSeparatedChoiceField, self).clean(value)
+
+
 class MessageForm(ModelForm):
+    # users = ModelCommaSeparatedChoiceField(
+    #            required=False, 
+    #            queryset=Bot_user.objects.filter(), 
+    #            to_field_name='pk')
     class Meta:
         model = Message
         fields = {'users', 'all', 'text', 'photo'}
@@ -63,13 +80,15 @@ class MessageForm(ModelForm):
         }
 
         widgets = {
-            'users': forms.Select(attrs={'class': 'form-control'}),
-            'all': forms.CheckboxInput(attrs={'class': 'custom-control-input'}),
-            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'users': forms.SelectMultiple(attrs={'class': 'custom-select form-control choicesjs'}),
+            'all': forms.CheckboxInput(attrs={'class': 'custom-control-input bg-primary', 'checked': False}),
+            'text': forms.Textarea(attrs={'class': 'form-control', "style":"height: 200px;"}),
             'photo': forms.FileInput(attrs={'class': 'custom-file-input'})
         }
 
-    field_order = {'all', 'users', 'text', 'photo'}
+    field_order = ['all', 'photo', 'users', 'text']
+
+
 class ProfileForm(forms.Form):
     username = forms.CharField(max_length=200, required=True)
     email = forms.CharField(max_length=200, required=False)

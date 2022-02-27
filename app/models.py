@@ -62,7 +62,7 @@ class Payment(models.Model):
     card = models.CharField(null=True, blank=True, max_length=50)
 
 class Message(models.Model):
-    users = models.ManyToManyField('Bot_user')
+    users = models.ManyToManyField('Bot_user', blank=True)
     all = models.BooleanField(blank=True, null=True)
     text = models.TextField(blank=True, null=True, max_length=1000)
     photo = models.FileField(upload_to='messages/', null=True, blank=True)

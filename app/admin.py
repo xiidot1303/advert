@@ -23,6 +23,8 @@ class GroupAdmin(admin.ModelAdmin):
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('textru', 'textuz','card')
 
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'all', 'text')
 
 admin.site.register(Bot_user, Bot_userAdmin)
 admin.site.register(Question, QuestionAdmin)
@@ -31,3 +33,4 @@ admin.site.register(Statement, StatementAdmin)
 admin.site.register(Backup_question, Backup_questionAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(Message, MessageAdmin)
