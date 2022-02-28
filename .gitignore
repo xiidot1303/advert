@@ -6,6 +6,7 @@ app/views/__pycache__
 app/templatetags/__pycache__
 views/__init__.py
 bot/__pycache__
+scheduled_job/__pycache__
 repost/__pycache__
 repost/__init__.py
 staticfiles
