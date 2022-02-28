@@ -69,6 +69,6 @@ urlpatterns = [
     path('statistic/users', bot_users, name='statistic_users'),
 
     #message
-    path('sendMessage', MessageCreateView.as_view(), name='send_message'),
+    path('sendMessage/<str:status>', MessageCreateView.as_view(), name='send_message'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

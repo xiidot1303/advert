@@ -9,6 +9,12 @@
 {% block main %}
 
 
+{% if alert %}
+<div class="alert alert-success" role="alert">
+    <div class="iq-alert-text">Сообщение <b>успешно</b> отправлено</div>
+ </div>
+{% else %}
+{% endif %}
 <form method = "post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">

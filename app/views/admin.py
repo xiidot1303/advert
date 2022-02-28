@@ -37,4 +37,14 @@ def change_profile(request):
 class MessageCreateView(LoginRequiredMixin, CreateView):
     template_name = 'views/send_message.html'
     form_class = MessageForm
-    success_url = '/sendMessage'
+    success_url = '/sendMessage/success'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        status = context['view'].kwargs['status']
+        if status == 'success':
+            context['alert'] = True
+        else:
+            context['alert'] = False
+        return context
