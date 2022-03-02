@@ -14,3 +14,8 @@ files/photos/*
 files/payment/*
 files/messages/*
 persistencebot
+.gitone
+.gittwo
+.git1
+.git2
+__pycache__
