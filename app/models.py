@@ -53,7 +53,7 @@ class Backup_question(models.Model):
     answer = models.IntegerField(null=True, blank=True) #answer ID
     
 class Group(models.Model):
-    group_id = models.IntegerField(null=True)
+    group_id = models.CharField(null=True, blank=True, max_length=30)
     name = models.CharField(null=True, blank=True, max_length=500)
 
 class Payment(models.Model):
