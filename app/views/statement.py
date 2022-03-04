@@ -56,7 +56,7 @@ def confirm_statement(request, pk):
             text += '{}: <i>{}</i>\n'.format(q.question, answers[n])
 
         n += 1
-    group = Group.objects.get(pk=1).group_id
+    group = int(Group.objects.get(pk=1).group_id)
     try:
     # if True:
         i_go = InlineKeyboardButton(text = 'Перейти бот', url=BOT_URL)
