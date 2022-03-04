@@ -1,13 +1,13 @@
-sample .env:
-TELEGRAM_BOT_API_TOKEN=
-ENVIRONMENT=local
-
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-
-
-GROUP=743393656
-BOT_URL=t.me/
+sample .env:<br>
+TELEGRAM_BOT_API_TOKEN=<br>
+ENVIRONMENT=local<br>
+<br>
+DB_HOST=localhost<br>
+DB_PORT=5432<br>
+DB_NAME=<br>
+DB_USER=<br>
+DB_PASSWORD=<br>
+<br>
+<br>
+GROUP=743393656<br>
+BOT_URL=t.me/<br>
