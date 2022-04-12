@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 class Bot_user(models.Model):
     user_id = models.IntegerField(null=True)
@@ -30,11 +31,15 @@ class Answer(models.Model):
     questions = models.CharField(null=True, blank=True, max_length=3000)  #save questions by "/""
     date = models.DateTimeField(null=True, blank=True, max_length=20)
     answer = models.CharField(null=True, blank=True, max_length=300)
+    new_answer = models.CharField(null=True, blank=True, max_length=300)
     photo = models.FileField(upload_to='photos/', null=True, blank=True)
     payment = models.FileField(upload_to='payment/', null=True, blank=True)
+    text = models.TextField(blank=True, null=True, max_length=3000, default='')
     
     end = models.BooleanField(null=True, blank=True, default=False) # completed answer or not
 
+    def filename(self):
+        return os.path.basename(self.photo.name)
     # def __str__(self) -> str:
     #     return self.
 

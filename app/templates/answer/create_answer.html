@@ -1,0 +1,97 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %}
+Добавления заявка
+{% endblock %}
+
+{% block main %}
+
+<!-- 
+<div class="row">
+</div> -->
+
+<div class="row">
+    <!-- Questions -->
+    <div class="col-sm-6 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Вопросы</h5>
+                {% for q in questions %}
+                <p class="card-text"> {{ forloop.counter }}. {{ q.questionru }} 
+                    {% if q.variantsru %}
+                    [{{ q.variantsru }}]
+                    {% endif %}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+
+
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="row">
+    {% for f in form %}
+
+    
+    {% if forloop.counter0 == 2 %}
+    </div>
+    <div class="row">
+    {% else %}
+    {% endif %}
+        <div class="col">
+            {% if f.id_for_label == 'id_photo' %}
+            <div class="custom-file mb-3" style="margin-top: 30px;">
+                {{ f.errors }} 
+                <!-- <p>Custom file:</p> -->
+                {{ f }}
+                <label class="custom-file-label" for="id_photo">Фото</label>
+                <a target="_blank" href="/files/{{ object.photo }}">{{ object.photo }}</a>
+
+            </div>
+            {% else %}
+            <div class="form-group">
+                {{ f.errors }} 
+                {{ f.label_tag }}    {{ f }}
+            </div>
+            {% endif %}
+        </div>
+
+    {% endfor %}
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+
+
+</form>
+{% endblock %}
+
+{% block script %}
+
+<script>
+    obj = document.getElementsByClassName('custom-select form-control choicesjs')[0];
+    if (obj.value.includes('//')) {
+
+        list = obj.value.split('//');
+        var value = "";
+        for (var x = 0; x < list.length-2; x++) {
+            
+            value += list[x] + ",";
+        }
+        value += list[list.length-2];
+        obj.value = value;
+        
+    }
+
+</script>
+
+{% endblock %}

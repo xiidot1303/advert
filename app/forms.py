@@ -26,6 +26,43 @@ class QuestionForm(ModelForm):
         }
     field_order = ['questionuz', 'questionru', 'variantsuz', 'variantsru', 'index', 'req_photo', 'is_required']
 
+
+
+
+class AnswerForm(ModelForm):
+    class Meta:
+        model = Answer
+        fields = {'answer', 'photo'}
+        widgets = {
+            # 'answer': forms.Textarea(attrs={'class': 'form-control', "style":"height: 200px;"}),
+            'answer': forms.TextInput(attrs={'class': 'custom-select form-control choicesjs', 'style': 'size: 10px'}),
+            'photo': forms.FileInput(attrs={'class': 'custom-file-input'}),
+        }
+        labels = {
+            'answer': 'Ответы',
+            'photo': 'Фото',
+        }
+    field_order = ['answer', 'photo']
+
+
+class AnswerCreateForm(ModelForm):
+    class Meta:
+        model = Answer
+        fields = {'user', 'answer', 'photo'}
+        widgets = {
+            # 'answer': forms.Textarea(attrs={'class': 'form-control', "style":"height: 200px;"}),
+            'answer': forms.TextInput(attrs={'class': 'custom-select form-control choicesjs', 'style': 'size: 10px'}),
+            'photo': forms.FileInput(attrs={'class': 'custom-file-input'}),
+            'user': forms.Select(attrs={'class': 'custom-select form-control choicesjs'}),
+        }
+        labels = {
+            'answer': 'Ответы',
+            'photo': 'Фото',
+            'user': 'Пользовател',
+        }
+    field_order = ['answer', 'photo', 'user']
+
+
 class PaymentForm(ModelForm):
     class Meta:
         model = Payment
@@ -59,7 +96,7 @@ class ModelCommaSeparatedChoiceField(ModelMultipleChoiceField):
     widget = forms.SelectMultiple(attrs={'class': 'custom-select form-control choicesjs', 'multiple': True})
     def clean(self, value):
         if value is not None:
-            print(value)
+            
             value = [item.strip() for item in value.split(",")] # remove padding
         return super(ModelCommaSeparatedChoiceField, self).clean(value)
 

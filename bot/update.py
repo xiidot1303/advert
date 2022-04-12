@@ -15,6 +15,8 @@ from bot.conversationList import *
 from bot.settings import *
 from bot.answering import *
 from bot.post_info import *
+from bot.vacancy import *
+from bot.only_text import *
 
 bot_obj = Bot(TELEGRAM_BOT_API_TOKEN)
 persistence = PicklePersistence(filename='persistencebot')
@@ -77,8 +79,42 @@ buyer_handler = ConversationHandler (
     persistent=True,
 )
 
+vacancy_handler = ConversationHandler (
+    entry_points = [MessageHandler(Filters.text(lang_dict['my vacancies']), vacancies)],
+    # entry_points = [CommandHandler('q', vacancies)],
+    states = {
+        VACANCY_ACTIONS: [CallbackQueryHandler(vacancy_actions), MessageHandler(Filters.text, vacancy_actions)],
+        # CHANING
+        CHANGING: [MessageHandler(Filters.text, loop_changing), MessageHandler(Filters.photo, loop_changing)],
+        CHANGE_PAYMENT: [MessageHandler(Filters.text, change_payment), MessageHandler(Filters.photo, change_payment)],
+        GET_TEXT_VACANCY: [MessageHandler(Filters.text, get_text_vacancy2)],
+        # CREATING
+        ANSWERING: [MessageHandler(Filters.text, loop_answering2), MessageHandler(Filters.photo, loop_answering2)],
+        ASK_PAYMENT: [MessageHandler(Filters.text, ask_payment2), MessageHandler(Filters.photo, ask_payment2)],
 
-    
+    },
+    fallbacks=[],
+    name = 'vacancy',
+    persistent=True,
+
+)
+
+
+
+only_text_handler = ConversationHandler (
+    entry_points = [MessageHandler(Filters.text(lang_dict['send by text']), only_text)],
+    states = {
+        GET_TEXT_VACANCY: [MessageHandler(Filters.text, get_text_vacancy)],
+    },
+    fallbacks=[],
+    name='only_text',
+    persistent=True,
+)
+
+
+
+dp.add_handler(only_text_handler)
+dp.add_handler(vacancy_handler)
 dp.add_handler(buyer_handler)
 dp.add_handler(seller_handler)
 dp.add_handler(settings_handler)

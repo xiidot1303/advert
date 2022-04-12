@@ -44,9 +44,13 @@ def is_start(func):    # This deco break registration if user send /start.
         if update.message.text == '/start' or data == 'main_menu' or update.message.text == get_word('main menu', update):
             user = get_user_by_update(update)
             for a in Answer.objects.filter(user=user, end = False):
-                for q in Backup_question.objects.filter(answer = a.pk):
-                    q.delete()
-                a.delete()
+                if not Statement.objects.filter(answer = a):
+                    for q in Backup_question.objects.filter(answer = a.pk):
+                        q.delete()
+                    a.delete()
+                else:
+                    a.end = True
+                    a.save()
             main_menu(args[0], args[1])
             return ConversationHandler.END
         else:

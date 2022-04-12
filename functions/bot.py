@@ -1,4 +1,4 @@
-from telegram import ReplyKeyboardMarkup, KeyboardButton
+from telegram import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 import telegram
 from bot.uz_ru import lang_dict
 from app.models import *
@@ -14,7 +14,8 @@ def main_menu(update, context):
         www= 0 # do nothing
     
     bot = context.bot
-    keyboard=[[get_word('seller', update)], [get_word('buyer', update)], [get_word('settings', update)]]
+    keyboard=[[get_word('seller', update)], [get_word('send by text', update)], [get_word('buyer', update)], [get_word('settings', update)],
+        [get_word('my vacancies', update)]]
     bot.send_message(update.message.chat.id, get_word('main menu', update), reply_markup=ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True))
     check_username(update)
 
@@ -97,3 +98,29 @@ def get_backup_question(index, answer_pk):
 # make text photo 
 def photo():
     return 'Po0enOIIJBUGERrftesUhio'
+
+def make_vacancies_card(update, context):
+    bot = context.bot
+    user = get_user_by_update(update)
+    for st_obj in Statement.objects.filter(answer__user = user, status='confirmed'):
+        answer_obj = st_obj.answer
+        answers = split_by_slash(answer_obj.answer)
+        user = answer_obj.user
+        questions = Backup_question.objects.filter(answer=answer_obj.pk)
+        # making texts
+        post_info = ''
+        n = 0
+        for q in questions:
+            if not q.req_photo:
+                post_info += '{}: <i>{}</i>\n'.format(q.question, answers[n])
+            n+=1
+        
+        # send posts
+        i_change = InlineKeyboardButton(text=get_word('change', update), callback_data='changestatement_{}'.format(st_obj.pk))
+        i_publish = InlineKeyboardButton(text=get_word('publish', update), callback_data='publishstatement_{}'.format(st_obj.pk))
+        if answer_obj.photo:
+            bot.send_photo(chat_id=update.message.chat.id, photo = answer_obj.photo, 
+                caption=post_info, parse_mode=telegram.ParseMode.HTML, reply_markup = InlineKeyboardMarkup([[i_change], [i_publish]]))
+        else:
+            bot.send_message(update.message.chat.id, post_info, parse_mode=telegram.ParseMode.HTML, 
+                reply_markup = InlineKeyboardMarkup([[i_change]]))

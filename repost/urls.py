@@ -29,6 +29,7 @@ from app.views.main import *
 from app.views.statement import *
 from app.views.statistic import *
 from app.views.admin import *
+from app.views.answer import *
 
 urlpatterns = [
     #main
@@ -48,10 +49,13 @@ urlpatterns = [
     #statement
     path('statement/list', list_statements, name='statement_list'),
     path('statement/confirm/<int:pk>/', confirm_statement, name='statement_confirm'),
-    path('statement/answers/<int:pk>', answer, name='statement_answer'),
+    path('statement/answers/<int:pk>', card, name='statement_answer'),
     path('statement/shared', shared_statements, name='statement_shared'),
 
-
+    # answer
+    path('answer/update/<int:pk>/', AnswerEditView.as_view(), name='answer_update'),
+    path('answer/detail/<int:pk>/', AnswerDetailView.as_view(), name='answer_detail'),
+    path('answer/create', AnswerCreateView.as_view(), name='answer_create'),
 
     #question
     path('question/create', QuestionCreateView.as_view(), name = 'question_create'),

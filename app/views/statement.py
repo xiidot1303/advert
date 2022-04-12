@@ -22,18 +22,7 @@ def shared_statements(request):
 
 
 
-@login_required
-def answer(request, pk):
-    answer_obj = Answer.objects.get(pk=pk)
-    questions = Backup_question.objects.filter(answer=pk)
-    answer_list = split_by_slash(answer_obj.answer)
-    photo = answer_obj.photo
-    st_pk = Statement.objects.get(answer_id=pk).pk
-    name = answer_obj.user.name
-    phone_number = answer_obj.user.phone
-    date = answer_obj.date
-    context = {'questions': questions, 'answers': answer_list, 'photo': photo, 'st_pk': st_pk, 'name': name, 'phone_number': phone_number, 'date': date}
-    return render(request, 'statement/answer.html', context)
+
 
 
 @login_required

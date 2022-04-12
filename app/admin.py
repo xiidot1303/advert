@@ -9,7 +9,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ('questionuz', 'questionru', 'variantsuz', 'variantsru', 'index')
 
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'user', 'date', 'answer')
+    list_display = ('pk', 'user', 'date', 'answer', 'new_answer')
 
 class StatementAdmin(admin.ModelAdmin):
     list_display = ('answer', 'status', 'pk')

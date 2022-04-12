@@ -64,11 +64,30 @@ lang_dict = {
     
     'phone number': ["""📞 Telefon raqam""", """📞 Номер телефона"""],
     
-    '': ["""""", """"""],
+    'my vacancies': ["""Mening vakansiyalarim 🧰""", """Мои вакансии 🧰"""],
+    
+    'all vacancies': ["""Barcha vakansiyalar 📑""", """Все вакансии 📑"""],
+    
+    'create vacancy': ["""➕ Vakansiya qo'shish""", """➕ Создать вакансию”"""],
+
+    'change': ["""🔄 O'zgartirish""", """🔄 Изменить"""],
+    
+    'publish': ["""📢 Nashr qilish""", """📢 Опубликовать"""],
+    
+    'leave blank': ["""Bo'sh qoldirish""", """Оставить пустым"""],
+    
+    'stay current answer': ["""Hozirgi javobda qolish ⏭""", """Остаться текущим ответом ⏭"""],
+    
+    'current answer': ["""Hozirgi javob""", """Текущий ответ"""],
+    
+    'send by text': ["""Matn orqali yuborish 📝""", """Отправить текстом 📝"""],
+    
+    'send text vacancy': ["""Vakansiya matnini kiriting""", """Отправьте текст вакансии"""],
     
     '': ["""""", """"""],
     
     '': ["""""", """"""],
+
     
     
 

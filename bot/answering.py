@@ -70,6 +70,9 @@ def loop_answering(update, context):
 
     if answer == get_word('skip', update):
         answer = '  '
+        if question_obj.req_photo:
+            answer_obj.photo = None
+            answer_obj.save()
     #check a question have variants or not
     elif question_obj.variants:
         answer = update.message.text
@@ -114,6 +117,7 @@ def loop_answering(update, context):
     update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True))
     return ANSWERING
 
+@is_start
 def ask_payment(update, context):
     bot = context.bot
     answer_obj = get_current_answer_by_update(update)

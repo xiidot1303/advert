@@ -34,17 +34,14 @@
       <h3 class="my-3">{{ name }} {{ phone_number }}</h3>
       <div class="card-columns">
          <div class="card">
-            <img src="/files/{{ photo }}" class="card-img-top" alt="#">
+            <!-- <img src="/files/{{ photo }}" class="card-img-top" alt="#"> -->
             <div class="card-body">
                <h4 class="card-title">{{ date|date:"d.m.Y H:i" }}</h4>
-               {% for q in questions %}
+               
                <p class="card-text">
-                  {% if q.req_photo %}
-                  {% else %}
-                  <b>{{ q.question }}:</b> {{ answers|index:forloop.counter0 }}
-                  {% endif %}
+                {{ text }} 
                </p>
-               {% endfor %}
+               
                <a href="{% url 'statement_confirm' st_pk %}">
                    <button type="button" class="btn btn-outline-success mt-2 btn-with-icon" style="margin-bottom: 20px;"><i class="ri-heart-line"></i>Опубликовать</button>
                

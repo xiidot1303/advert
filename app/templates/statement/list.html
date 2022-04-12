@@ -27,7 +27,7 @@
             <td>{{ l.answer.date|date:"d/m/Y H:i" }}</td>
 
 
-            <td><a class="mt-2 btn btn-primary" style="background-color: rgb(19, 160, 19);" href="{% url 'statement_confirm' l.pk %}" role="button" onclick="return confirm(&#39;Вы уверены?&#39;)" data-toggle="tooltip" title="Опубликовать"><i class="fas fa-check-circle"></i></a>
+            <td><a class="mt-2 btn btn-primary" style="background-color: rgb(19, 160, 19);" href="{% url 'answer_update' l.answer.pk %}" role="button"  data-toggle="tooltip" title="Опубликовать"><i class="fas fa-check-circle"></i></a>
                <div class="tooltip bs-tooltip-top" role="tooltip">
                   <div class="arrow"></div>
                   <div class="tooltip-inner">Опубликовать</div>
