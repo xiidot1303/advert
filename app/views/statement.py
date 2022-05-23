@@ -1,34 +1,29 @@
-from django.http import HttpResponse, FileResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
-from functions.bot import photo, split_by_slash
+from functions.bot import split_by_slash
 import telegram
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from config import BOT_URL, GROUP, TELEGRAM_BOT_API_TOKEN
+from config import BOT_URL, TELEGRAM_BOT_API_TOKEN
+
 
 @login_required
 def list_statements(request):
-    sts = Statement.objects.filter(status = 'waiting').order_by('-pk')
-    context = {'list': sts}
-    return render(request, 'statement/list.html', context)
+    sts = Statement.objects.filter(status="waiting").order_by("-pk")
+    context = {"list": sts}
+    return render(request, "statement/list.html", context)
 
 
 def shared_statements(request):
-    sts = Statement.objects.filter(status = 'confirmed').order_by('-pk')
-    context = {'list': sts}
-    return render(request, 'statement/shared.html', context)
-
-
-
-
+    sts = Statement.objects.filter(status="confirmed").order_by("-pk")
+    context = {"list": sts}
+    return render(request, "statement/shared.html", context)
 
 
 @login_required
 def confirm_statement(request, pk):
     obj = Statement.objects.get(pk=pk)
-    obj.status = 'confirmed'
+    obj.status = "confirmed"
     answer_obj = obj.answer
     photo = answer_obj.photo
     id = pk
@@ -42,21 +37,30 @@ def confirm_statement(request, pk):
     n = 0
     for q in questions:
         if not q.req_photo:
-            text += '{}: <i>{}</i>\n'.format(q.question, answers[n])
+            text += "{}: <i>{}</i>\n".format(q.question, answers[n])
 
         n += 1
     group = int(Group.objects.get(pk=1).group_id)
     try:
-    # if True:
-        i_go = InlineKeyboardButton(text = 'Перейти бот', url=BOT_URL)
+        # if True:
+        i_go = InlineKeyboardButton(text="Перейти бот", url=BOT_URL)
         markup = InlineKeyboardMarkup([[i_go]])
         if photo:
-            bot.sendPhoto(chat_id=group, photo=photo, caption=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
+            bot.sendPhoto(
+                chat_id=group,
+                photo=photo,
+                caption=text,
+                reply_markup=markup,
+                parse_mode=telegram.ParseMode.HTML,
+            )
         else:
-            bot.sendMessage(chat_id=group, text=text, reply_markup = markup, parse_mode = telegram.ParseMode.HTML)
+            bot.sendMessage(
+                chat_id=group,
+                text=text,
+                reply_markup=markup,
+                parse_mode=telegram.ParseMode.HTML,
+            )
     except:
         error = True
     obj.save()
     return redirect(list_statements)
-
-

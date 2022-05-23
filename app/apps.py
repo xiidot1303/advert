@@ -7,10 +7,10 @@ from django.apps import AppConfig
 
 
 class job(AppConfig):
-    name = 'app'
+    name = "app"
+
     def ready(self):
         from scheduled_job import updater, job
+
         updater.start()
         # job.update()
-
-        
