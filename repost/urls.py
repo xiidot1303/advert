@@ -30,6 +30,7 @@ from app.views.statement import *
 from app.views.statistic import *
 from app.views.admin import *
 from app.views.answer import *
+from app.views import click_api
 
 urlpatterns = [
     #main
@@ -74,5 +75,11 @@ urlpatterns = [
 
     #message
     path('sendMessage/<str:status>', MessageCreateView.as_view(), name='send_message'),
+
+
+    # click-api
+    path('click/prepare', click_api.prepare),
+    path('click/complate', click_api.complate),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
