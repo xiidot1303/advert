@@ -50,7 +50,8 @@ lang_dict = {
     
     'send photo': ["""Iltimos rasm yuboring!""", """Пожалуйста, отправьте фото!"""],
     
-    'completed answering': ["""Rahmat! Sizning so'rovingiz qabul qilindi va tez orada ko'rib chiqiladi""", """Спасибо! Ваша заявка принята и будет опубликована после модерации"""],
+    'completed answering': ["""Rahmat! Sizning so'rovingiz qabul qilindi va tez orada ko'rib chiqiladi\nSo'rov ID raqami: [id]""", 
+    """Спасибо! Ваша заявка принята и будет опубликована после модерации\nID: [id]"""],
     
     'type post number': ["""Post raqamini kirting:""", """Введите номер поста:"""],
     
@@ -83,6 +84,24 @@ lang_dict = {
     'send by text': ["""Matn orqali yuborish 📝""", """Отправить текстом 📝"""],
     
     'send text vacancy': ["""Vakansiya matnini kiriting""", """Отправьте текст вакансии"""],
+    
+    'phone for payment': ["""To'lovni amalga oshirish uchun sizning telefon raqamingizga sms xabarnoma yuboriladi.\n
+    Iltimos telefon raqamingizni kiriting <i>(+998991234567 formatida)</i>""", 
+    """На ваш номер телефона будет отправлено смс о проведении платежа.\n
+    Пожалуйста введите ваш номер телефона <i>(В формате: +998991234567)</i>"""],
+    
+    'phone is incorrect': ["""Telefon raqam noto'g'ti kiritildi, iltimos qaytatdan urinib ko'ring""", 
+    """Номер телефона введен неверно, попробуйте еще раз"""],
+    
+    'error on payment': ["""Xatolik ro'y berdi, iltimos qaytatdan urinib ko'ring""", """Произошла ошибка. Пожалуйста, попробуйте еще раз"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
+    
+    '': ["""""", """"""],
     
     '': ["""""", """"""],
     

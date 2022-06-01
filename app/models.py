@@ -46,6 +46,9 @@ class Answer(models.Model):
 class Statement(models.Model):
     answer = models.ForeignKey('Answer', null=True, blank=False, on_delete=models.PROTECT)
     status = models.CharField(null=True, blank=True, max_length=20, choices=(('waiting', 'waiting'), ('cancelled', 'cancelled'), ('confirmed', 'confirmed')))
+    payment_status = models.CharField(null=True, blank=True, max_length=20, 
+        choices=((0, 'В ожидании'), (-1, 'Отменено'), (1, 'Оплачено')), default=0)
+    invoice_id = models.IntegerField(null=True, blank=True)
     views = models.IntegerField(null=True, blank=True, default=0)
 
 class Backup_question(models.Model):
@@ -65,6 +68,7 @@ class Payment(models.Model):
     textuz = models.CharField(null=True, blank=True, max_length=1000)
     textru = models.CharField(null=True, blank=True, max_length=1000)
     card = models.CharField(null=True, blank=True, max_length=50)
+    amount = models.IntegerField(null=True, blank=True)
 
 class Message(models.Model):
     users = models.ManyToManyField('Bot_user', blank=True)

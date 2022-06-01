@@ -61,7 +61,7 @@ seller_handler = ConversationHandler(
     entry_points = [MessageHandler(Filters.text(lang_dict['seller']), seller)],
     states = {
         ANSWERING: [MessageHandler(Filters.text, loop_answering), MessageHandler(Filters.photo, loop_answering)],
-        ASK_PAYMENT: [MessageHandler(Filters.text, ask_payment), MessageHandler(Filters.photo, ask_payment)],
+        ASK_PAYMENT: [MessageHandler(Filters.text | Filters.contact, ask_payment)],
     },
     fallbacks=[],
     name = 'seller',
@@ -90,7 +90,7 @@ vacancy_handler = ConversationHandler (
         GET_TEXT_VACANCY: [MessageHandler(Filters.text, get_text_vacancy2)],
         # CREATING
         ANSWERING: [MessageHandler(Filters.text, loop_answering2), MessageHandler(Filters.photo, loop_answering2)],
-        ASK_PAYMENT: [MessageHandler(Filters.text, ask_payment2), MessageHandler(Filters.photo, ask_payment2)],
+        ASK_PAYMENT: [MessageHandler(Filters.text | Filters.contact, ask_payment2)],
 
     },
     fallbacks=[],

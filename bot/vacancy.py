@@ -8,6 +8,7 @@ from bot.conversationList import *
 from bot.main import vacancies
 from functions.bot import *
 from functions.deco import *
+from functions import send_click_api
 
 @is_start
 def vacancy_actions(update, context):
@@ -191,20 +192,34 @@ def loop_changing(update, context):
     last_question = Backup_question.objects.filter(answer = answer_obj.pk).order_by('-index')[0]
     if last_question.index == question_index:
         # end answering
-        answer_obj.save()
-        payment_obj = Payment.objects.get(pk=1)
-        user = get_user_by_update(update)
-        if user.lang == 'uz':
-            text = payment_obj.textuz
-        else:
-            text = payment_obj.textru
+        # answer_obj.save()
+        # payment_obj = Payment.objects.get(pk=1)
+        # user = get_user_by_update(update)
+        # if user.lang == 'uz':
+        #     text = payment_obj.textuz
+        # else:
+        #     text = payment_obj.textru
 
-        card = payment_obj.card
-        keyboards = []
-        keyboards.append([get_word('back', update)])
-        update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True), parse_mode = telegram.ParseMode.HTML)
-        update.message.reply_text("`{}`".format(card), parse_mode = telegram.ParseMode.MARKDOWN)
-        return CHANGE_PAYMENT
+        # card = payment_obj.card
+        # keyboards = []
+        # keyboards.append([get_word('back', update)])
+        # update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True), parse_mode = telegram.ParseMode.HTML)
+        # update.message.reply_text("`{}`".format(card), parse_mode = telegram.ParseMode.MARKDOWN)
+        # return CHANGE_PAYMENT
+
+        answer_obj.end = True
+        answer_obj.date = datetime.now()
+        answer_obj.answer = answer_obj.new_answer
+        answer_obj.new_answer = ''
+        answer_obj.save()
+        st_obj = Statement.objects.get(answer = answer_obj)
+        st_obj.status = 'waiting'
+        st_obj.save()
+
+        update.message.reply_text(get_word('completed answering', update).replace('[id]', str(st_obj.pk)))
+        vacancies(update, context)
+        return VACANCY_ACTIONS
+
 
     next_question_obj = get_backup_question(question_index+1, answer_obj.pk)
     text = '{}\n\n{}: *{}*'.format(next_question_obj.question, 
@@ -401,18 +416,21 @@ def loop_answering2(update, context):
     if last_question.index == question_index:
         # end answering
         answer_obj.save()
-        payment_obj = Payment.objects.get(pk=1)
-        user = get_user_by_update(update)
-        if user.lang == 'uz':
-            text = payment_obj.textuz
-        else:
-            text = payment_obj.textru
+        # payment_obj = Payment.objects.get(pk=1)
+        # user = get_user_by_update(update)
+        # if user.lang == 'uz':
+        #     text = payment_obj.textuz
+        # else:
+        #     text = payment_obj.textru
 
-        card = payment_obj.card
+        # card = payment_obj.card
+        text = get_word('phone for payment', update)
+
         keyboards = []
+        keyboards.append([KeyboardButton(text=get_word('leave number', update), request_contact=True)])
         keyboards.append([get_word('back', update)])
         update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True), parse_mode = telegram.ParseMode.HTML)
-        update.message.reply_text("`{}`".format(card), parse_mode = telegram.ParseMode.MARKDOWN)
+        # update.message.reply_text("`{}`".format(card), parse_mode = telegram.ParseMode.MARKDOWN)
         return ASK_PAYMENT
 
     next_question_obj = get_backup_question(question_index+1, answer_obj.pk)
@@ -462,24 +480,49 @@ def ask_payment2(update, context):
     
 
 
-    # check is answer photo 
-    try:
-        # try to download photo
-        p = bot.getFile(update.message.photo[-1].file_id)
-        *args, file_name = str(p.file_path).split('/')
-        d_photo = p.download('files/payment/{}'.format(file_name))
-        answer_obj.payment = str(d_photo).replace('files/', '')
+    # # check is answer photo 
+    # try:
+    #     # try to download photo
+    #     p = bot.getFile(update.message.photo[-1].file_id)
+    #     *args, file_name = str(p.file_path).split('/')
+    #     d_photo = p.download('files/payment/{}'.format(file_name))
+    #     answer_obj.payment = str(d_photo).replace('files/', '')
         
-    except:
-        # answer is not photo object
-        update.message.reply_text(get_word('send photo', update))
-        return ASK_PAYMENT
+    # except:
+    #     # answer is not photo object
+    #     update.message.reply_text(get_word('send photo', update))
+    #     return ASK_PAYMENT
 
     # end answering
+
+
+    if update.message.contact == None or not update.message.contact:
+        phone_number = update.message.text
+    else:
+        phone_number = update.message.contact.phone_number
+
+    obj = Statement.objects.create(answer = answer_obj, status = 'waiting')
+    payment_obj = Payment.objects.get(pk=1)
+    response = send_click_api.create_invoice(phone=phone_number, amount=payment_obj.amount, trans_id=str(obj.pk))
+    if response == 'timeout':
+        text = get_word('phone is incorrect', update)
+        update.reply_text(text)
+        obj.delete()
+        return 
+    elif response == 'error':
+        text = get_word('error on payment', update)
+        update.reply_text(text)
+        obj.delete()
+        return
+    
+    obj.invoice_id = response
+    obj.save()
+
     answer_obj.end = True
     answer_obj.date = datetime.now()
     answer_obj.save()
-    Statement.objects.create(answer = answer_obj, status = 'waiting')
-    update.message.reply_text(get_word('completed answering', update))
+    
+
+    update.message.reply_text(get_word('completed answering', update).replace('[id]', str(obj.pk)))
     vacancies(update, context)
     return VACANCY_ACTIONS
