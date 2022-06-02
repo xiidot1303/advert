@@ -13,6 +13,7 @@ DB_NAME = os.environ.get("DB_NAME")
 DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 
+TELEGRAM_BOT_API_TOKEN = os.environ.get("TELEGRAM_BOT_API_TOKEN")
 GROUP = os.environ.get("GROUP")
 BOT_URL = os.environ.get("BOT_URL")
 
