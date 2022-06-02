@@ -8,7 +8,7 @@ from telegram.ext import (
     CallbackQueryHandler,
 )
 
-from config import TELEGRAM_BOT_API_TOKEN, ENVIRONMENT
+from config import TELEGRAM_BOT_API_TOKEN, DEBUG
 
 from bot.main import *
 from bot.login import *
@@ -23,7 +23,7 @@ from bot.only_text import *
 bot_obj = Bot(TELEGRAM_BOT_API_TOKEN)
 persistence = PicklePersistence(filename="persistencebot")
 
-if ENVIRONMENT != "local":  # in production
+if not DEBUG:  # in production
     updater = 1213
     dp = Dispatcher(bot_obj, None, workers=0, use_context=True, persistence=persistence)
 else:  # in local computer
