@@ -133,7 +133,7 @@ class ModelCommaSeparatedChoiceField(ModelMultipleChoiceField):
 class MessageForm(ModelForm):
     # users = ModelCommaSeparatedChoiceField(
     #            required=False,
-    #            queryset=Bot_user.objects.filter(),
+    #            queryset=BotUser.objects.filter(),
     #            to_field_name='pk')
     class Meta:
         model = Message

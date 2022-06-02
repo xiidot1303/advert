@@ -15,16 +15,16 @@ def main_menu(request):
     Payment.objects.get_or_create(pk=1)
     Group.objects.get_or_create(pk=1)
     # -_-_-_-_-_-_-_
-    count_bot_users = len(Bot_user.objects.all())
+    count_bot_users = BotUser.objects.count()
     today = datetime.now()
     count_daily_bot_users = len(
-        Bot_user.objects.filter(
+        BotUser.objects.filter(
             date__year=today.year, date__month=today.month, date__day=today.day
         )
     )
     amount_bot_users = [count_bot_users, count_daily_bot_users]
 
-    amount_bot_clients = len(Bot_user.objects.filter(is_client=True))
+    amount_bot_clients = BotUser.objects.filter(is_client=True).count()
     amount_posts = len(Statement.objects.filter(status="confirmed"))
 
     def make_date(obj):
@@ -35,7 +35,7 @@ def main_menu(request):
         map(
             lambda l: make_date(l[0]),
             list(
-                Bot_user.objects.annotate(day=TruncDay("date"))
+                BotUser.objects.annotate(day=TruncDay("date"))
                 .values("day")
                 .annotate(c=Count("id"))
                 .values_list("day", "c")
@@ -59,7 +59,7 @@ def main_menu(request):
         map(
             lambda l: int(l[1]),
             list(
-                Bot_user.objects.annotate(day=TruncDay("date"))
+                BotUser.objects.annotate(day=TruncDay("date"))
                 .values("day")
                 .annotate(c=Count("id"))
                 .values_list("day", "c")

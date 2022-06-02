@@ -49,7 +49,7 @@ def make_button_settings(update, context):
 
 
 def get_word(text, update):
-    user = Bot_user.objects.get(user_id=update.message.chat.id)
+    user = BotUser.objects.get(user_id=update.message.chat.id)
     if user.lang == "uz":
         return lang_dict[text][0]
     else:
@@ -57,14 +57,14 @@ def get_word(text, update):
 
 
 def is_registered(id):
-    if Bot_user.objects.filter(user_id=id):
+    if BotUser.objects.filter(user_id=id):
         return True
     else:
         return False
 
 
 def get_user_by_update(update):
-    user = Bot_user.objects.get(user_id=update.message.chat.id)
+    user = BotUser.objects.get(user_id=update.message.chat.id)
     return user
 
 

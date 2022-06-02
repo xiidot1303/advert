@@ -84,7 +84,7 @@ def lang_settings(update, context):
     update = update.callback_query
     bot = context.bot
     data = str(update.data)
-    user = Bot_user.objects.get(user_id=update.message.chat.id)
+    user = BotUser.objects.get(user_id=update.message.chat.id)
     if data == "set_lang_uz":
         user.lang = "uz"
         user.save()
@@ -127,11 +127,11 @@ def phone_settings(update, context):
         phone_number = update.message.contact.phone_number
 
     # check that phone is available or no
-    is_available = Bot_user.objects.filter(phone=phone_number)
+    is_available = BotUser.objects.filter(phone=phone_number)
     if is_available:
         update.message.reply_text(get_word("number is logged", update))
         return PHONE_SETTINGS
-    obj = Bot_user.objects.get(user_id=update.message.chat.id)
+    obj = BotUser.objects.get(user_id=update.message.chat.id)
     obj.phone = phone_number
     obj.save()
     update.message.reply_text(get_word("changed your phone number", update))

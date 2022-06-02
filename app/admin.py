@@ -3,7 +3,7 @@ from django.contrib import admin
 from app.models import *
 
 
-class Bot_userAdmin(admin.ModelAdmin):
+class BotUserAdmin(admin.ModelAdmin):
     list_display = ("user_id", "name", "phone", "lang")
     search_fields = ("user_id", "name", "phone")
 
@@ -36,7 +36,7 @@ class MessageAdmin(admin.ModelAdmin):
     list_display = ("pk", "all", "text")
 
 
-admin.site.register(Bot_user, Bot_userAdmin)
+admin.site.register(BotUser, BotUserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Statement, StatementAdmin)

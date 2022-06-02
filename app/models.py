@@ -3,7 +3,7 @@ import os
 from django.db import models
 
 
-class Bot_user(models.Model):
+class BotUser(models.Model):
     user_id = models.IntegerField(null=True)
     name = models.CharField(null=True, blank=True, max_length=200)
     username = models.CharField(null=True, blank=True, max_length=200)
@@ -32,7 +32,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     user = models.ForeignKey(
-        "Bot_user", null=True, blank=False, on_delete=models.PROTECT
+        "app.BotUser", null=True, blank=False, on_delete=models.PROTECT
     )
     questions = models.CharField(
         null=True, blank=True, max_length=3000
@@ -82,7 +82,7 @@ class Statement(models.Model):
 
 class Backup_question(models.Model):
     user = models.ForeignKey(
-        "Bot_user", null=True, blank=False, on_delete=models.PROTECT
+        "app.BotUser", null=True, blank=False, on_delete=models.PROTECT
     )
     question = models.CharField(null=True, blank=True, max_length=500)
     variants = models.CharField(null=True, blank=True, max_length=300)
@@ -105,7 +105,7 @@ class Payment(models.Model):
 
 
 class Message(models.Model):
-    users = models.ManyToManyField("Bot_user", blank=True)
+    users = models.ManyToManyField("app.BotUser", blank=True)
     all = models.BooleanField(blank=True, null=True)
     text = models.TextField(blank=True, null=True, max_length=1000)
     photo = models.FileField(upload_to="messages/", null=True, blank=True)

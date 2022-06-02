@@ -1,4 +1,4 @@
-from app.models import Message, Bot_user
+from app.models import Message, BotUser
 from config import TELEGRAM_BOT_API_TOKEN
 import telegram
 
@@ -8,7 +8,7 @@ def update():
     for msg in Message.objects.all():
 
         if msg.all:
-            users = Bot_user.objects.all()
+            users = BotUser.objects.all()
         elif msg.users.all():
             users = msg.users.all()
         else:
