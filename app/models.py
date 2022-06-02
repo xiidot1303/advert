@@ -1,5 +1,6 @@
-from django.db import models
 import os
+
+from django.db import models
 
 
 class Bot_user(models.Model):
@@ -68,6 +69,14 @@ class Statement(models.Model):
             ("confirmed", "confirmed"),
         ),
     )
+    payment_status = models.CharField(
+        null=True,
+        blank=True,
+        max_length=20,
+        choices=((0, "В ожидании"), (-1, "Отменено"), (1, "Оплачено")),
+        default=0,
+    )
+    invoice_id = models.IntegerField(null=True, blank=True)
     views = models.IntegerField(null=True, blank=True, default=0)
 
 
@@ -92,6 +101,7 @@ class Payment(models.Model):
     textuz = models.CharField(null=True, blank=True, max_length=1000)
     textru = models.CharField(null=True, blank=True, max_length=1000)
     card = models.CharField(null=True, blank=True, max_length=50)
+    amount = models.IntegerField(null=True, blank=True)
 
 
 class Message(models.Model):

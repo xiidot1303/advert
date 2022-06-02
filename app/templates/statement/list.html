@@ -15,6 +15,7 @@
           <th>Имя</th>
           <th>Номер телефона</th>
           <th>Дата</th>
+          <th>Статус</th>
           <th>Действия</th>
        </tr>
     </thead>
@@ -25,7 +26,15 @@
             <td>{{ l.answer.user.name }}</td>
             <td>{{ l.answer.user.phone }}</td>
             <td>{{ l.answer.date|date:"d/m/Y H:i" }}</td>
-
+            <td>
+               {% if l.payment_status == -1 %}
+                  ❌ Отменено
+               {% elif l.payment_status == 1 %}
+                  ✅ Оплачено
+               {% else %}
+                  ⏳ В ожидании
+               {% endif %}
+            </td>
 
             <td><a class="mt-2 btn btn-primary" style="background-color: rgb(19, 160, 19);" href="{% url 'answer_update' l.answer.pk %}" role="button"  data-toggle="tooltip" title="Опубликовать"><i class="fas fa-check-circle"></i></a>
                <div class="tooltip bs-tooltip-top" role="tooltip">
@@ -40,11 +49,11 @@
                </div>
 
 
-               <a class="mt-2 btn btn-primary" target="_blank" style="background-color: rgb(32, 94, 72);" href="/files/{{ l.answer.payment }}" role="button"  data-toggle="tooltip" title="Оплата"><i class="fas fa-money-check"></i></a>
+               <!-- <a class="mt-2 btn btn-primary" target="_blank" style="background-color: rgb(32, 94, 72);" href="/files/{{ l.answer.payment }}" role="button"  data-toggle="tooltip" title="Оплата"><i class="fas fa-money-check"></i></a>
                <div class="tooltip bs-tooltip-top" role="tooltip">
                   <div class="arrow"></div>
                   <div class="tooltip-inner">Оплата</div>
-               </div>
+               </div> -->
 
             </td>
        </tr>
