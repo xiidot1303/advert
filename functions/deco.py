@@ -50,7 +50,7 @@ def is_start(func):  # This deco break registration if user send /start.
             user = get_user_by_update(update)
             for a in Answer.objects.filter(user=user, end=False):
                 if not Statement.objects.filter(answer=a):
-                    for q in Backup_question.objects.filter(answer=a.pk):
+                    for q in BackupQuestion.objects.filter(answer=a.pk):
                         q.delete()
                     a.delete()
                 else:

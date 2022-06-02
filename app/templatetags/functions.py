@@ -22,7 +22,7 @@ def cuttext(text):
 def text_maker(obj):
     print(obj)
     answer_obj = obj
-    questions = Backup_question.objects.filter(answer=answer_obj.pk)
+    questions = BackupQuestion.objects.filter(answer=answer_obj.pk)
     answers = split_by_slash(answer_obj.answer)
     list_answers = []
     n = 0

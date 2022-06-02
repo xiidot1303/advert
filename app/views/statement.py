@@ -28,7 +28,7 @@ def confirm_statement(request, pk):
     photo = answer_obj.photo
     id = pk
     answers = split_by_slash(answer_obj.answer)
-    questions = Backup_question.objects.filter(answer=answer_obj.pk)
+    questions = BackupQuestion.objects.filter(answer=answer_obj.pk)
 
     # send to group or channel
     my_token = TELEGRAM_BOT_API_TOKEN

@@ -29,7 +29,7 @@ def card(request, pk):
         }
         return render(request, "answer/answer_only_text.html", context)
 
-    questions = Backup_question.objects.filter(answer=pk)
+    questions = BackupQuestion.objects.filter(answer=pk)
     answer_list = split_by_slash(answer_obj.answer)
     photo = answer_obj.photo
     context = {
@@ -53,7 +53,7 @@ class AnswerEditView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["questions"] = Backup_question.objects.filter(
+        context["questions"] = BackupQuestion.objects.filter(
             answer=context["object"].pk
         )
         return context
@@ -99,7 +99,7 @@ class AnswerDetailView(LoginRequiredMixin, DetailView):
             n = 1
             for q in Question.objects.all().order_by("index"):
                 if user.lang == "uz":
-                    Backup_question.objects.create(
+                    BackupQuestion.objects.create(
                         user=user,
                         question=q.questionuz,
                         variants=q.variantsuz,
@@ -109,7 +109,7 @@ class AnswerDetailView(LoginRequiredMixin, DetailView):
                         answer=answer_obj.pk,
                     )
                 else:
-                    Backup_question.objects.create(
+                    BackupQuestion.objects.create(
                         user=user,
                         question=q.questionru,
                         variants=q.variantsru,

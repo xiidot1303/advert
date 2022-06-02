@@ -36,7 +36,7 @@ def seller(update, context):
     n = 1
     for q in Question.objects.all().order_by("index"):
         if user.lang == "uz":
-            Backup_question.objects.create(
+            BackupQuestion.objects.create(
                 user=user,
                 question=q.questionuz,
                 variants=q.variantsuz,
@@ -46,7 +46,7 @@ def seller(update, context):
                 answer=answer.pk,
             )
         else:
-            Backup_question.objects.create(
+            BackupQuestion.objects.create(
                 user=user,
                 question=q.questionru,
                 variants=q.variantsru,
@@ -56,7 +56,7 @@ def seller(update, context):
                 answer=answer.pk,
             )
         n += 1
-    question_obj = Backup_question.objects.filter(user=user, answer=answer.pk).order_by(
+    question_obj = BackupQuestion.objects.filter(user=user, answer=answer.pk).order_by(
         "index"
     )[0]
     text = question_obj.question
@@ -109,7 +109,7 @@ def only_text(update, context):
     n = 1
     for q in Question.objects.all().order_by("index"):
         if user.lang == "uz":
-            Backup_question.objects.create(
+            BackupQuestion.objects.create(
                 user=user,
                 question=q.questionuz,
                 variants=q.variantsuz,
@@ -119,7 +119,7 @@ def only_text(update, context):
                 answer=answer.pk,
             )
         else:
-            Backup_question.objects.create(
+            BackupQuestion.objects.create(
                 user=user,
                 question=q.questionru,
                 variants=q.variantsru,

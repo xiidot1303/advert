@@ -80,7 +80,7 @@ class Statement(models.Model):
     views = models.IntegerField(null=True, blank=True, default=0)
 
 
-class Backup_question(models.Model):
+class BackupQuestion(models.Model):
     user = models.ForeignKey(
         "app.BotUser", null=True, blank=False, on_delete=models.PROTECT
     )

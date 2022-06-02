@@ -26,7 +26,7 @@ def loop_answering(update, context):
     if update.message.text == get_word("back", update):
         question_index -= 1
         if question_index == 0:
-            for q in Backup_question.objects.filter(answer=answer_obj.pk):
+            for q in BackupQuestion.objects.filter(answer=answer_obj.pk):
                 q.delete()
             answer_obj.delete()
             main_menu(update, context)
@@ -90,7 +90,7 @@ def loop_answering(update, context):
     answer_obj.answer += str(answer) + "//"  # set current text as answer
     answer_obj.save()
     # check is that last question ans anwer
-    last_question = Backup_question.objects.filter(answer=answer_obj.pk).order_by(
+    last_question = BackupQuestion.objects.filter(answer=answer_obj.pk).order_by(
         "-index"
     )[0]
     if last_question.index == question_index:
@@ -102,12 +102,22 @@ def loop_answering(update, context):
         #     text = payment_obj.textuz
         # else:
         #     text = payment_obj.textru
-        text = get_word('phone for payment', update)
-        
+        text = get_word("phone for payment", update)
+
         keyboards = []
-        keyboards.append([KeyboardButton(text=get_word('leave number', update), request_contact=True)])
-        keyboards.append([get_word('back', update)])
-        update.message.reply_text(text, reply_markup = ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True), parse_mode = telegram.ParseMode.HTML)
+        keyboards.append(
+            [
+                KeyboardButton(
+                    text=get_word("leave number", update), request_contact=True
+                )
+            ]
+        )
+        keyboards.append([get_word("back", update)])
+        update.message.reply_text(
+            text,
+            reply_markup=ReplyKeyboardMarkup(keyboard=keyboards, resize_keyboard=True),
+            parse_mode=telegram.ParseMode.HTML,
+        )
         # update.message.reply_text("`{}`".format(card), parse_mode = telegram.ParseMode.MARKDOWN)
         return ASK_PAYMENT
 
@@ -138,7 +148,7 @@ def ask_payment(update, context):
     if update.message.text == get_word("back", update):
         question_index -= 1
         if question_index == 0:
-            for q in Backup_question.objects.filter(answer=answer_obj.pk):
+            for q in BackupQuestion.objects.filter(answer=answer_obj.pk):
                 q.delete()
             answer_obj.delete()
             main_menu(update, context)
@@ -163,14 +173,14 @@ def ask_payment(update, context):
         )
         return ANSWERING
 
-    # # check is answer photo 
+    # # check is answer photo
     # try:
     #     # try to download photo
     #     p = bot.getFile(update.message.photo[-1].file_id)
     #     *args, file_name = str(p.file_path).split('/')
     #     d_photo = p.download('files/payment/{}'.format(file_name))
     #     answer_obj.payment = str(d_photo).replace('files/', '')
-        
+
     # except:
     #     # answer is not photo object
     #     update.message.reply_text(get_word('send photo', update))
@@ -182,20 +192,22 @@ def ask_payment(update, context):
         phone_number = update.message.text
     else:
         phone_number = update.message.contact.phone_number
-    obj = Statement.objects.create(answer = answer_obj, status = 'waiting')
+    obj = Statement.objects.create(answer=answer_obj, status="waiting")
     payment_obj = Payment.objects.get(pk=1)
-    response = send_click_api.create_invoice(phone=phone_number, amount=payment_obj.amount, trans_id=str(obj.pk))
-    if response == 'timeout':
-        text = get_word('phone is incorrect', update)
-        update.message.reply_text(text)
-        obj.delete()
-        return 
-    elif response == 'error':
-        text = get_word('error on payment', update)
+    response = send_click_api.create_invoice(
+        phone=phone_number, amount=payment_obj.amount, trans_id=str(obj.pk)
+    )
+    if response == "timeout":
+        text = get_word("phone is incorrect", update)
         update.message.reply_text(text)
         obj.delete()
         return
-    
+    elif response == "error":
+        text = get_word("error on payment", update)
+        update.message.reply_text(text)
+        obj.delete()
+        return
+
     obj.invoice_id = response
     obj.save()
 
@@ -203,6 +215,8 @@ def ask_payment(update, context):
     answer_obj.date = datetime.now()
     answer_obj.save()
 
-    update.message.reply_text(get_word('completed answering', update).replace('[id]', str(obj.pk)))
+    update.message.reply_text(
+        get_word("completed answering", update).replace("[id]", str(obj.pk))
+    )
     main_menu(update, context)
     return ConversationHandler.END

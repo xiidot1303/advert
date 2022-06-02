@@ -20,7 +20,7 @@ class StatementAdmin(admin.ModelAdmin):
     list_display = ("answer", "status", "pk")
 
 
-class Backup_questionAdmin(admin.ModelAdmin):
+class BackupQuestionAdmin(admin.ModelAdmin):
     list_display = ("user", "question", "variants", "index", "answer")
 
 
@@ -40,7 +40,7 @@ admin.site.register(BotUser, BotUserAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Statement, StatementAdmin)
-admin.site.register(Backup_question, Backup_questionAdmin)
+admin.site.register(BackupQuestion, BackupQuestionAdmin)
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Message, MessageAdmin)

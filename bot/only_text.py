@@ -15,7 +15,7 @@ def get_text_vacancy(update, context):
     answer_obj = get_current_answer_by_update(update)
 
     if answer == get_word("back", update):
-        for q in Backup_question.objects.filter(answer=answer_obj.pk):
+        for q in BackupQuestion.objects.filter(answer=answer_obj.pk):
             q.delete()
         answer_obj.delete()
         main_menu(update, context)

@@ -112,7 +112,7 @@ def get_current_answer_by_update(update):
 
 
 def get_backup_question(index, answer_pk):
-    obj = Backup_question.objects.get(index=index, answer=answer_pk)
+    obj = BackupQuestion.objects.get(index=index, answer=answer_pk)
     return obj
 
 
@@ -128,7 +128,7 @@ def make_vacancies_card(update, context):
         answer_obj = st_obj.answer
         answers = split_by_slash(answer_obj.answer)
         user = answer_obj.user
-        questions = Backup_question.objects.filter(answer=answer_obj.pk)
+        questions = BackupQuestion.objects.filter(answer=answer_obj.pk)
         # making texts
         post_info = ""
         n = 0

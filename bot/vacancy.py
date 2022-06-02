@@ -53,7 +53,7 @@ def vacancy_actions(update, context):
                 )
                 return GET_TEXT_VACANCY
 
-            question_obj = Backup_question.objects.filter(
+            question_obj = BackupQuestion.objects.filter(
                 user=user, answer=answer.pk
             ).order_by("index")[0]
             text = "{}\n\n{}: *{}*".format(
@@ -99,7 +99,7 @@ def vacancy_actions(update, context):
             n = 1
             for q in Question.objects.all().order_by("index"):
                 if user.lang == "uz":
-                    Backup_question.objects.create(
+                    BackupQuestion.objects.create(
                         user=user,
                         question=q.questionuz,
                         variants=q.variantsuz,
@@ -109,7 +109,7 @@ def vacancy_actions(update, context):
                         answer=answer.pk,
                     )
                 else:
-                    Backup_question.objects.create(
+                    BackupQuestion.objects.create(
                         user=user,
                         question=q.questionru,
                         variants=q.variantsru,
@@ -119,7 +119,7 @@ def vacancy_actions(update, context):
                         answer=answer.pk,
                     )
                 n += 1
-            question_obj = Backup_question.objects.filter(
+            question_obj = BackupQuestion.objects.filter(
                 user=user, answer=answer.pk
             ).order_by("index")[0]
             text = question_obj.question
@@ -235,7 +235,7 @@ def loop_changing(update, context):
     answer_obj.new_answer += str(answer) + "//"  # set current text as answer
     answer_obj.save()
     # check is that last question ans anwer
-    last_question = Backup_question.objects.filter(answer=answer_obj.pk).order_by(
+    last_question = BackupQuestion.objects.filter(answer=answer_obj.pk).order_by(
         "-index"
     )[0]
     if last_question.index == question_index:
@@ -403,7 +403,7 @@ def loop_answering2(update, context):
     if update.message.text == get_word("back", update):
         question_index -= 1
         if question_index == 0:
-            for q in Backup_question.objects.filter(answer=answer_obj.pk):
+            for q in BackupQuestion.objects.filter(answer=answer_obj.pk):
                 q.delete()
             answer_obj.delete()
             vacancies(update, context)
@@ -467,7 +467,7 @@ def loop_answering2(update, context):
     answer_obj.answer += str(answer) + "//"  # set current text as answer
     answer_obj.save()
     # check is that last question ans anwer
-    last_question = Backup_question.objects.filter(answer=answer_obj.pk).order_by(
+    last_question = BackupQuestion.objects.filter(answer=answer_obj.pk).order_by(
         "-index"
     )[0]
     if last_question.index == question_index:
@@ -527,7 +527,7 @@ def ask_payment2(update, context):
     if update.message.text == get_word("back", update):
         question_index -= 1
         if question_index == 0:
-            for q in Backup_question.objects.filter(answer=answer_obj.pk):
+            for q in BackupQuestion.objects.filter(answer=answer_obj.pk):
                 q.delete()
             answer_obj.delete()
             vacancies(update, context)

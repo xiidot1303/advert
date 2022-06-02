@@ -24,7 +24,7 @@ def send_post(update, context):
     user = answer_obj.user
 
     # post info
-    questions = Backup_question.objects.filter(answer=answer_obj.pk)
+    questions = BackupQuestion.objects.filter(answer=answer_obj.pk)
     post_info = "<b>ID: </b>{}\n".format(id)
     n = 0
     for q in questions:
