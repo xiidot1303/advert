@@ -6,7 +6,7 @@ from app.models import *
 
 @csrf_exempt
 def prepare(request):
-    data = request.body.decode()
+    data = json.loads(request.body.decode())
     click_trans_id = data['click_trans_id']
     merchant_trans_id = int(data['merchant_trans_id'])
     amount = data['amount']
@@ -29,7 +29,7 @@ def prepare(request):
 
 @csrf_exempt
 def complate(request):
-    data = request.body.decode()
+    data = json.loads(request.body.decode())
     click_trans_id = data['click_trans_id']
     merchant_trans_id = data['merchant_trans_id']
 
