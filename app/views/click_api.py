@@ -7,6 +7,9 @@ from app.models import *
 @csrf_exempt
 def prepare(request):
     data = json.loads(request.body.decode())
+    file = open('text.txt', 'wb')
+    file.write(request.body)
+    file.close()
     click_trans_id = data['click_trans_id']
     merchant_trans_id = int(data['merchant_trans_id'])
     amount = data['amount']
