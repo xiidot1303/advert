@@ -72,5 +72,5 @@ urlpatterns = [
     path("sendMessage/<str:status>", MessageCreateView.as_view(), name="send_message"),
     # click-api
     path("click/prepare", click_api.prepare),
-    path("click/complate", click_api.complate),
+    path("click/complete", click_api.complete),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
