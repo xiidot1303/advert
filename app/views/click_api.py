@@ -5,7 +5,7 @@ from app.models import *
 
 
 @csrf_exempt
-def prepare(request):
+def click_prepare(request):
     data = json.loads(request.body.decode())
     print('frf\n\ngr\n\n\n', data)
     click_trans_id = data['click_trans_id']
@@ -29,7 +29,7 @@ def prepare(request):
 
 
 @csrf_exempt
-def complete(request):
+def click_complete(request):
     data = json.loads(request.body.decode())
     print(data)
     click_trans_id = data['click_trans_id']
